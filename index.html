@@ -87,18 +87,36 @@ Agende una conversación</a>
 .ssv-tab:hover{border-color:#C8A24B;color:#FFFFFF}
 .ssv-tab[aria-pressed="true"]{background:#C8A24B;border-color:#C8A24B;color:#0B1C4D;font-weight:700}
 .ssv-tab:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
+.ssv-phone{cursor:pointer;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent}
+.ssv-phone:focus-visible{outline:2px solid #FFFFFF;outline-offset:3px}
+.ssv-estado{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:999px;background:rgba(8,18,47,0.86);color:#FFFFFF;font-size:12px;font-weight:600;line-height:1;white-space:nowrap;opacity:0;transition:opacity .15s;pointer-events:none}
+.ssv-estado svg{width:11px;height:11px;fill:currentColor;flex:none}
+.ssv-e-pausa,.ssv-e-play{align-items:center;gap:6px}
+.ssv-estado .ssv-e-pausa{display:inline-flex}
+.ssv-estado .ssv-e-play{display:none}
+.ssv-manteniendo .ssv-estado,.ssv-pausado .ssv-estado{opacity:1}
+.ssv-pausado:not(.ssv-manteniendo) .ssv-e-pausa{display:none}
+.ssv-pausado:not(.ssv-manteniendo) .ssv-e-play{display:inline-flex}
+.ssv-pistas{display:flex;flex-direction:column;align-items:center;gap:3px;margin-top:-6px;font-size:12.5px;line-height:1.4;color:#AFC0E0;text-align:center}
+.ssv-pista{display:inline-flex;align-items:center;gap:6px}
+.ssv-flecha{width:14px;height:14px;flex:none;fill:none;stroke:#C8A24B;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;animation:ssvBote 1.4s ease-in-out infinite}
+@keyframes ssvBote{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.ssv-usado .ssv-flecha{animation:none}
+@media (prefers-reduced-motion: reduce){.ssv-flecha{animation:none}}
 </style>
 <div class="ssv-wrap" data-ssv>
-<div class="ssv-phone">
+<div class="ssv-phone" tabindex="0" role="button" aria-pressed="false" aria-label="Pausar o continuar el video">
 <video muted playsinline loop preload="none" poster="flujo.jpg" aria-label="Video del asistente por WhatsApp: proyección del flujo de caja">
 <source src="flujo.mp4" type="video/mp4">
 </video>
+<span class="ssv-estado" aria-hidden="true"><span class="ssv-e-pausa"><svg viewBox="0 0 12 12"><rect x="1.5" y="1" width="3" height="10" rx="1"/><rect x="7.5" y="1" width="3" height="10" rx="1"/></svg>En pausa</span><span class="ssv-e-play"><svg viewBox="0 0 12 12"><path d="M2.5 1.2v9.6L10.5 6z"/></svg>Toque para continuar</span></span>
 </div>
 <div class="ssv-tabs" role="group" aria-label="Elegir ejemplo">
 <button class="ssv-tab" type="button" aria-pressed="true" data-video="flujo" data-texto="proyección del flujo de caja">Flujo de caja</button>
 <button class="ssv-tab" type="button" aria-pressed="false" data-video="por_cobrar" data-texto="cuentas por cobrar">Por cobrar</button>
 <button class="ssv-tab" type="button" aria-pressed="false" data-video="factura" data-texto="estado de una factura">Facturas</button>
 </div>
+<div class="ssv-pistas"><span class="ssv-pista"><svg class="ssv-flecha" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Toque cada opción para ver otra respuesta</span><span class="ssv-pista ssv-pista-pausa">Mantenga presionado el video para pausarlo</span></div>
 </div>
 <script>
 (function () {
@@ -108,12 +126,55 @@ Agende una conversación</a>
   function iniciar() { Array.prototype.forEach.call(document.querySelectorAll('[data-ssv]'), function (caja) {
     var video = caja.querySelector('video');
     var botones = caja.querySelectorAll('.ssv-tab');
+    var telefono = caja.querySelector('.ssv-phone');
     var visible = false;
-    if (quieto) { video.controls = true; }
-    function reproducir() { if (!quieto && visible) { var p = video.play(); if (p && p.catch) { p.catch(function () {}); } } }
+    // Pausa: tocar el video lo deja en pausa (otro toque lo continúa); mantenerlo presionado lo pausa mientras se mantiene.
+    var pausadoUsuario = false, manteniendo = false, tocando = false, espera = null;
+    if (quieto) {
+      video.controls = true;
+      telefono.removeAttribute('tabindex'); telefono.removeAttribute('role'); telefono.removeAttribute('aria-pressed'); telefono.removeAttribute('aria-label');
+      var pp = caja.querySelector('.ssv-pista-pausa'); if (pp) { pp.style.display = 'none'; }
+    }
+    function reproducir() { if (!quieto && visible && !pausadoUsuario && !manteniendo) { var p = video.play(); if (p && p.catch) { p.catch(function () {}); } } }
+    function marcar() {
+      telefono.classList.toggle('ssv-pausado', pausadoUsuario);
+      telefono.classList.toggle('ssv-manteniendo', manteniendo);
+      if (!quieto) { telefono.setAttribute('aria-pressed', pausadoUsuario ? 'true' : 'false'); }
+    }
+    function alternar() {
+      if (video.paused && !pausadoUsuario) { reproducir(); return; }  // no había partido solo (p. ej. ahorro de batería): el toque lo inicia
+      pausadoUsuario = !pausadoUsuario;
+      if (pausadoUsuario) { video.pause(); }
+      marcar(); reproducir();
+    }
+    function terminarToque(fueToque) {
+      if (!tocando) { return; }
+      tocando = false;
+      if (espera) { clearTimeout(espera); espera = null; if (fueToque) { alternar(); } return; }
+      if (manteniendo) { manteniendo = false; marcar(); reproducir(); }
+    }
+    if (!quieto) {
+      telefono.addEventListener('pointerdown', function (e) {
+        if (e.button) { return; }
+        tocando = true;
+        espera = setTimeout(function () {
+          espera = null;
+          if (tocando && !video.paused) { manteniendo = true; video.pause(); marcar(); }
+        }, 220);
+      });
+      telefono.addEventListener('pointerup', function () { terminarToque(true); });
+      telefono.addEventListener('pointercancel', function () { terminarToque(false); });
+      telefono.addEventListener('pointerleave', function () { terminarToque(false); });
+      telefono.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+      telefono.addEventListener('keydown', function (e) {
+        if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); alternar(); }
+      });
+    }
     Array.prototype.forEach.call(botones, function (b) {
       b.addEventListener('click', function () {
         if (b.getAttribute('aria-pressed') === 'true') { return; }
+        caja.classList.add('ssv-usado');
+        pausadoUsuario = false; marcar();
         Array.prototype.forEach.call(botones, function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
         var nombre = b.getAttribute('data-video');
         video.pause();
@@ -266,16 +327,18 @@ Agende una conversación</a>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 32px 48px; padding: clamp(24px, 4vw, 40px); border-radius: 14px; border: 1px solid #C8A24B">
 <div class="ssv-wrap" data-ssv style="max-width: 300px">
-<div class="ssv-phone">
+<div class="ssv-phone" tabindex="0" role="button" aria-pressed="false" aria-label="Pausar o continuar el video">
 <video muted playsinline loop preload="none" poster="ventas.jpg" aria-label="Video del asistente por WhatsApp: ventas del mes">
 <source src="ventas.mp4" type="video/mp4">
 </video>
+<span class="ssv-estado" aria-hidden="true"><span class="ssv-e-pausa"><svg viewBox="0 0 12 12"><rect x="1.5" y="1" width="3" height="10" rx="1"/><rect x="7.5" y="1" width="3" height="10" rx="1"/></svg>En pausa</span><span class="ssv-e-play"><svg viewBox="0 0 12 12"><path d="M2.5 1.2v9.6L10.5 6z"/></svg>Toque para continuar</span></span>
 </div>
 <div class="ssv-tabs" role="group" aria-label="Elegir ejemplo">
 <button class="ssv-tab" type="button" aria-pressed="true" data-video="ventas" data-texto="ventas del mes">Ventas</button>
 <button class="ssv-tab" type="button" aria-pressed="false" data-video="f29" data-texto="proyección del F29">F29</button>
 <button class="ssv-tab" type="button" aria-pressed="false" data-video="kpi" data-texto="indicadores financieros">Indicadores</button>
 </div>
+<div class="ssv-pistas"><span class="ssv-pista"><svg class="ssv-flecha" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>Toque cada opción para ver otra respuesta</span><span class="ssv-pista ssv-pista-pausa">Mantenga presionado el video para pausarlo</span></div>
 </div>
 <div style="flex: 1 1 320px; max-width: 520px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
 <span style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: clamp(20px, 2vw, 24px); color: #FFFFFF">Así responde su asistente</span>
