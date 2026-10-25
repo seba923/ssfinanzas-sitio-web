@@ -90,8 +90,8 @@ Agende una conversación</a>
 </style>
 <div class="ssv-wrap" data-ssv>
 <div class="ssv-phone">
-<video muted playsinline loop preload="none" poster="videos/flujo.jpg" aria-label="Video del asistente por WhatsApp: proyección del flujo de caja">
-<source src="videos/flujo.mp4" type="video/mp4">
+<video muted playsinline loop preload="none" poster="flujo.jpg" aria-label="Video del asistente por WhatsApp: proyección del flujo de caja">
+<source src="flujo.mp4" type="video/mp4">
 </video>
 </div>
 <div class="ssv-tabs" role="group" aria-label="Elegir ejemplo">
@@ -117,8 +117,8 @@ Agende una conversación</a>
         Array.prototype.forEach.call(botones, function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
         var nombre = b.getAttribute('data-video');
         video.pause();
-        video.setAttribute('poster', 'videos/' + nombre + '.jpg');
-        video.querySelector('source').setAttribute('src', 'videos/' + nombre + '.mp4');
+        video.setAttribute('poster', nombre + '.jpg');
+        video.querySelector('source').setAttribute('src', nombre + '.mp4');
         video.setAttribute('aria-label', 'Video del asistente por WhatsApp: ' + b.getAttribute('data-texto'));
         video.load();
         visible = true;
@@ -267,8 +267,8 @@ Agende una conversación</a>
 <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 32px 48px; padding: clamp(24px, 4vw, 40px); border-radius: 14px; border: 1px solid #C8A24B">
 <div class="ssv-wrap" data-ssv style="max-width: 300px">
 <div class="ssv-phone">
-<video muted playsinline loop preload="none" poster="videos/ventas.jpg" aria-label="Video del asistente por WhatsApp: ventas del mes">
-<source src="videos/ventas.mp4" type="video/mp4">
+<video muted playsinline loop preload="none" poster="ventas.jpg" aria-label="Video del asistente por WhatsApp: ventas del mes">
+<source src="ventas.mp4" type="video/mp4">
 </video>
 </div>
 <div class="ssv-tabs" role="group" aria-label="Elegir ejemplo">
