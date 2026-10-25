@@ -77,376 +77,69 @@ Agende una conversación</a>
 </div>
 
 <div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 14px">
-<!-- ===== Chat animado del asistente (inicio) ===== -->
+<!-- ===== Videos del asistente (inicio) ===== -->
 <style>
-.ssc-wrap{width:100%;max-width:380px;display:flex;flex-direction:column;align-items:center;gap:14px}
-.ssc-card{color-scheme:only light;position:relative;width:100%;background:#EFEAE2;color:#111B21;border-radius:22px;box-shadow:0 24px 60px rgba(3,10,30,0.45);overflow:hidden;font-family:"Segoe UI","Helvetica Neue",Helvetica,"Lucida Grande",Arial,Ubuntu,Cantarell,"Fira Sans",sans-serif}
-.ssc-head{display:flex;align-items:center;gap:12px;padding:12px 14px 12px 16px;background:#F0F2F5;border-bottom:1px solid #E1E4E7}
-.ssc-avatar{width:40px;height:40px;flex:none;display:block}
-.ssc-name{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px}
-.ssc-name b{font-size:16px;font-weight:600;color:#111B21}
-.ssc-status{font-size:13px;color:#667781}
-.ssc-status.ssc-on{color:#008069}
-.ssc-icons{display:flex;gap:18px;color:#54656F}
-.ssc-body{box-sizing:border-box;height:360px;padding:12px 18px 14px;overflow:hidden;background-color:#EFEAE2;background-image:radial-gradient(rgba(84,101,111,0.10) 1.2px,transparent 1.4px),radial-gradient(rgba(84,101,111,0.07) 1px,transparent 1.2px);background-size:24px 24px,24px 24px;background-position:0 0,12px 12px}
-.ssc-msgs{display:flex;flex-direction:column;gap:10px;transition:opacity .4s ease}
-.ssc-msgs.ssc-out{opacity:0}
-.ssc-day{align-self:center;background:#FFFFFF;color:#54656F;font-size:12px;padding:5px 12px;border-radius:8px;box-shadow:0 1px 0.5px rgba(11,20,26,0.13)}
-.ssc-user,.ssc-bot,.ssc-typing{position:relative;box-shadow:0 1px 0.5px rgba(11,20,26,0.13);font-size:14px;line-height:19px;color:#111B21}
-.ssc-user{align-self:flex-end;max-width:82%;background:#D9FDD3;border-radius:8px 0 8px 8px;padding:6px 8px 8px 9px}
-.ssc-bot{align-self:flex-start;box-sizing:border-box;width:88%;background:#FFFFFF;border-radius:0 8px 8px 8px;padding:8px 10px 8px 10px;display:flex;flex-direction:column;gap:6px}
-.ssc-typing{align-self:flex-start;display:flex;gap:4px;background:#FFFFFF;border-radius:0 8px 8px 8px;padding:12px 14px}
-.ssc-user::after,.ssc-bot::after,.ssc-typing::after{content:"";position:absolute;top:0;width:8px;height:13px}
-.ssc-user::after{right:-8px;background:#D9FDD3;clip-path:polygon(0 0,100% 0,0 100%)}
-.ssc-bot::after,.ssc-typing::after{left:-8px;background:#FFFFFF;clip-path:polygon(0 0,100% 0,100% 100%)}
-.ssc-typing i{width:7px;height:7px;border-radius:50%;background:#8696A0;animation:ssc-dot 1s infinite ease-in-out}
-.ssc-typing i:nth-child(2){animation-delay:.15s}
-.ssc-typing i:nth-child(3){animation-delay:.3s}
-.ssc-meta{float:right;display:inline-flex;align-items:center;gap:3px;margin:8px 0 -5px 10px;font-size:11px;line-height:15px;color:#667781;white-space:nowrap}
-.ssc-bot .ssc-meta{align-self:flex-end;float:none;margin:-2px 0 -3px}
-.ssc-title{font-weight:700}
-.ssc-row{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
-.ssc-row span:first-child{color:#3B4A54}
-.ssc-row span:last-child{white-space:nowrap}
-.ssc-total{padding-top:6px;border-top:1px solid #E9EDEF;font-weight:700}
-.ssc-total span:first-child{color:#111B21}
-.ssc-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
-.ssc-bar{height:5px;border-radius:3px;background:#E9EDEF;overflow:hidden;margin:-2px 0 2px}
-.ssc-bar b{display:block;height:100%;width:0;border-radius:3px;transition:width .9s ease-out}
-.ssc-verde{background:#00A884}.ssc-ambar{background:#E9A23B}.ssc-rojo{background:#E15B5B}
-.ssc-badge{align-self:flex-start;font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;background:#E7F8EE;color:#0E6B45}
-.ssc-badge.ssc-alerta{background:#FDF1DC;color:#8A5300}
-.ssc-note{font-size:12.5px;line-height:17px;color:#667781}
-.ssc-in{animation:ssc-in .3s ease-out both}
-@keyframes ssc-in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@keyframes ssc-dot{0%,60%,100%{opacity:.4;transform:none}30%{opacity:1;transform:translateY(-3px)}}
-.ssc-foot{display:flex;align-items:center;gap:8px;padding:8px 10px;background:#F0F2F5}
-.ssc-field{flex:1;min-width:0;display:flex;align-items:center;gap:8px;box-sizing:border-box;min-height:42px;padding:0 12px;border-radius:21px;background:#FFFFFF;color:#54656F}
-.ssc-field svg{flex:none}
-.ssc-input{flex:1;min-width:0;font-size:14.5px;line-height:20px;color:#111B21;white-space:nowrap;overflow:hidden}
-.ssc-input.ssc-empty{color:#8696A0;text-overflow:ellipsis}
-.ssc-caret{display:inline-block;width:1px;height:17px;margin-left:1px;vertical-align:-3px;background:#00A884;animation:ssc-blink .9s steps(1) infinite}
-@keyframes ssc-blink{50%{opacity:0}}
-.ssc-send{position:relative;width:42px;height:42px;border-radius:50%;background:#00A884;color:#FFFFFF;flex:none;transition:transform .15s ease}
-.ssc-send svg{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);transition:opacity .15s}
-.ssc-send .ssc-i-send{opacity:0}
-.ssc-send.ssc-typing-on .ssc-i-send{opacity:1}
-.ssc-send.ssc-typing-on .ssc-i-mic{opacity:0}
-.ssc-send.ssc-press{transform:scale(.86)}
-.ssc-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
-.ssc-tab{font:inherit;font-size:13px;line-height:1;color:#D5DCEC;background:transparent;border:1px solid rgba(255,255,255,0.3);border-radius:999px;padding:0 14px;min-height:36px;cursor:pointer}
-.ssc-tab:hover{border-color:#C8A24B;color:#FFFFFF}
-.ssc-tab[aria-pressed="true"]{background:#C8A24B;border-color:#C8A24B;color:#0B1C4D;font-weight:700}
-.ssc-tab:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
-.ssc-medir{position:absolute;left:0;top:0;visibility:hidden;pointer-events:none}
-@media (max-width: 420px){.ssc-body{padding:12px 14px 14px}.ssc-bot{width:94%}.ssc-user{max-width:88%}.ssc-icons{gap:14px}}
-@media (max-width: 360px){.ssc-body{padding:10px 12px 12px}.ssc-user,.ssc-bot{font-size:13px;line-height:18px}.ssc-row{gap:8px}}
-@media (prefers-reduced-motion: reduce){
-.ssc-in,.ssc-typing i,.ssc-caret{animation:none}
-.ssc-msgs,.ssc-bar b,.ssc-send,.ssc-send svg{transition:none}
-}
+.ssv-wrap{width:100%;max-width:340px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.ssv-phone{position:relative;width:100%;aspect-ratio:720/1244;box-sizing:border-box;border:6px solid #08122F;border-radius:30px;overflow:hidden;background:#EFEAE2;box-shadow:0 24px 60px rgba(3,10,30,0.45)}
+.ssv-phone video{display:block;width:100%;height:100%;object-fit:cover;background:#EFEAE2}
+.ssv-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
+.ssv-tab{font:inherit;font-size:13px;line-height:1;color:#D5DCEC;background:transparent;border:1px solid rgba(255,255,255,0.3);border-radius:999px;padding:0 14px;min-height:36px;cursor:pointer}
+.ssv-tab:hover{border-color:#C8A24B;color:#FFFFFF}
+.ssv-tab[aria-pressed="true"]{background:#C8A24B;border-color:#C8A24B;color:#0B1C4D;font-weight:700}
+.ssv-tab:focus-visible{outline:2px solid #FFFFFF;outline-offset:2px}
 </style>
-<div class="ssc-wrap" id="ssc-chat">
-<div class="ssc-card" role="img" aria-label="Ejemplo animado del Agente IA por WhatsApp: flujo de caja, cuentas por cobrar y estado de facturas">
-<div class="ssc-head">
-<svg class="ssc-avatar" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="20" fill="#CFD8DC"></circle><circle cx="20" cy="15.5" r="7.2" fill="#FFFFFF"></circle><path d="M6.6 34.6C9.3 28.5 14.2 25.4 20 25.4s10.7 3.1 13.4 9.2A19.9 19.9 0 0 1 20 40 19.9 19.9 0 0 1 6.6 34.6z" fill="#FFFFFF"></path></svg>
-<div class="ssc-name"><b>Agente IA</b><span class="ssc-status">en línea</span></div>
-<div class="ssc-icons" aria-hidden="true">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="M15.5 15.5 20 20"></path></svg>
-<svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="5" r="2"></circle><circle cx="12" cy="12" r="2"></circle><circle cx="12" cy="19" r="2"></circle></svg>
+<div class="ssv-wrap" data-ssv>
+<div class="ssv-phone">
+<video muted playsinline loop preload="none" poster="videos/flujo.jpg" aria-label="Video del asistente por WhatsApp: proyección del flujo de caja">
+<source src="videos/flujo.mp4" type="video/mp4">
+</video>
 </div>
+<div class="ssv-tabs" role="group" aria-label="Elegir ejemplo">
+<button class="ssv-tab" type="button" aria-pressed="true" data-video="flujo" data-texto="proyección del flujo de caja">Flujo de caja</button>
+<button class="ssv-tab" type="button" aria-pressed="false" data-video="por_cobrar" data-texto="cuentas por cobrar">Por cobrar</button>
+<button class="ssv-tab" type="button" aria-pressed="false" data-video="factura" data-texto="estado de una factura">Facturas</button>
 </div>
-<div class="ssc-body">
-<div class="ssc-msgs">
-<div class="ssc-day">Hoy</div>
-<div class="ssc-user">Proyecta el flujo de caja con el F29 y las cuentas por cobrar</div>
-<div class="ssc-bot">
-<span class="ssc-title">Flujo de caja proyectado</span>
-<div class="ssc-row"><span>Saldo en banco</span><span>$ •••.•••</span></div>
-<div class="ssc-row"><span>(+) Cuentas por cobrar</span><span>$ •••.•••</span></div>
-<div class="ssc-row"><span>(−) F29 por pagar</span><span>$ •••.•••</span></div>
-<div class="ssc-row ssc-total"><span>Flujo proyectado</span><span>$ •••.•••</span></div>
-</div>
-</div>
-</div>
-<div class="ssc-foot">
-<div class="ssc-field">
-<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M8.5 14.5c.9 1.2 2.1 1.8 3.5 1.8s2.6-.6 3.5-1.8"></path><circle cx="9" cy="10" r=".6" fill="currentColor"></circle><circle cx="15" cy="10" r=".6" fill="currentColor"></circle></svg>
-<div class="ssc-input ssc-empty">Escribe un mensaje</div>
-<svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.5 6v11.5a4 4 0 0 1-8 0V5a2.5 2.5 0 0 1 5 0v10.5a1 1 0 0 1-2 0V6H10v9.5a2.5 2.5 0 0 0 5 0V5a4 4 0 0 0-8 0v12.5a5.5 5.5 0 0 0 11 0V6h-1.5z"></path></svg>
-</div>
-<div class="ssc-send" aria-hidden="true">
-<svg class="ssc-i-mic" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 14a3 3 0 0 0 3-3V5a3 3 0 0 0-6 0v6a3 3 0 0 0 3 3zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.92V21h2v-3.08A7 7 0 0 0 19 11h-2z"></path></svg>
-<svg class="ssc-i-send" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M3.4 20.4 21 12 3.4 3.6 3.4 10.2 15 12 3.4 13.8z"></path></svg>
-</div>
-</div>
-</div>
-<div class="ssc-tabs" role="group" aria-label="Elegir ejemplo"></div>
 </div>
 <script>
 (function () {
-  // ---------- Ajustes ----------
-  var MOSTRAR_MONTOS = true;   // false = muestra "$ •••.•••" en vez de montos
-  var PAUSA_RESPUESTA = 5200;  // ms que queda visible cada respuesta
-
-  var raiz = document.getElementById('ssc-chat');
-  if (!raiz) return;
-  var card = raiz.querySelector('.ssc-card');
-  var body = raiz.querySelector('.ssc-body');
-  var msgs = raiz.querySelector('.ssc-msgs');
-  var input = raiz.querySelector('.ssc-input');
-  var send = raiz.querySelector('.ssc-send');
-  var estado = raiz.querySelector('.ssc-status');
-  var tabsBox = raiz.querySelector('.ssc-tabs');
-  var ESTADO_BASE = estado.textContent;
-  var PLACEHOLDER = input.textContent;
-  var reducido = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  // ---------- Fechas (siempre actuales) ----------
-  var MESES = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-  var hoy = new Date();
-  var m = hoy.getMonth();
-  function mes(off) { return MESES[(m + off + 12) % 12]; }
-  function Mes(off) { var n = mes(off); return n.charAt(0).toUpperCase() + n.slice(1); }
-  function dd(n) { return ('0' + n).slice(-2); }
-  function diaMes(dias) { var d = new Date(hoy.getTime() - dias * 86400000); return dd(d.getDate()) + '-' + dd(d.getMonth() + 1); }
-  function hora() { var d = new Date(); return dd(d.getHours()) + ':' + dd(d.getMinutes()); }
-  function pesos(n) {
-    if (!MOSTRAR_MONTOS) return '$ •••.•••';
-    return '$\u00A0' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.');
-  }
-
-  // ---------- Conversaciones (montos de ejemplo, cuadran entre sí) ----------
-  var CONVERSACIONES = [
-    { tab: 'Flujo de caja', pregunta: 'Proyecta el flujo de caja con el F29 de ' + mes(-1) + ' y las cuentas por cobrar', respuesta: [
-      ['titulo', 'Flujo de caja proyectado · ' + Mes(0)],
-      ['fila', 'Saldo en banco', pesos(8450000)],
-      ['fila', '(+) Cuentas por cobrar', pesos(5200000)],
-      ['fila', '(−) F29 ' + mes(-1), pesos(1380000)],
-      ['total', 'Flujo proyectado', pesos(12270000)],
-      ['nota', 'Considera 6 facturas por cobrar y el F29 de ' + mes(-1) + '.']
-    ]},
-    { tab: 'Por cobrar', pregunta: '¿Cuánto tengo en cuentas por cobrar?', respuesta: [
-      ['titulo', 'Cuentas por cobrar · al ' + diaMes(0)],
-      ['estado', 'Por vencer (4)', pesos(3150000), 'ssc-verde'], ['barra', 61, 'ssc-verde'],
-      ['estado', 'Vencidas 1–30 días (1)', pesos(1420000), 'ssc-ambar'], ['barra', 27, 'ssc-ambar'],
-      ['estado', 'Vencidas +30 días (1)', pesos(630000), 'ssc-rojo'], ['barra', 12, 'ssc-rojo'],
-      ['total', 'Total por cobrar', pesos(5200000)],
-      ['alerta', '⚠ 2 facturas vencidas por ' + pesos(2050000)]
-    ]},
-    { tab: 'Facturas', pregunta: '¿Me pagaron la factura N° 1542?', respuesta: [
-      ['titulo', 'Factura N° 1542'],
-      ['fila', 'Cliente', 'RUT 76.•••.•••-5'],
-      ['fila', 'Emitida', diaMes(34)],
-      ['fila', 'Monto', pesos(2380000)],
-      ['etiqueta', '✓ Pagada el ' + diaMes(3)],
-      ['nota', 'Pago recibido en su cuenta bancaria.']
-    ]}
-  ];
-
-  // ---------- Construcción de mensajes ----------
-  var CHECKS = '<svg width="16" height="11" viewBox="0 0 16 11" fill="none" stroke="#53BDEB" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 6l3 3 6-7.5"></path><path d="M7.5 9l1 0.8 6-7.8"></path></svg>';
-  function el(tag, cls, txt) {
-    var e = document.createElement(tag);
-    if (cls) e.className = cls;
-    if (txt != null) e.textContent = txt;
-    return e;
-  }
-  function meta(conChecks) {
-    var s = el('span', 'ssc-meta', hora());
-    if (conChecks) s.insertAdjacentHTML('beforeend', CHECKS);
-    return s;
-  }
-  function fila(k, v, cls, punto) {
-    var r = el('div', 'ssc-row' + (cls ? ' ' + cls : ''));
-    var a = el('span', null, k);
-    if (punto) a.insertBefore(el('i', 'ssc-dot ' + punto), a.firstChild);
-    r.appendChild(a);
-    r.appendChild(el('span', null, v));
-    return r;
-  }
-  function mensajeCliente(texto, clases) {
-    var u = el('div', 'ssc-user' + (clases || ''), texto);
-    u.appendChild(meta(true));
-    return u;
-  }
-  function piezas(conv) {
-    return conv.respuesta.map(function (p) {
-      if (p[0] === 'titulo') return el('span', 'ssc-title', p[1]);
-      if (p[0] === 'fila') return fila(p[1], p[2]);
-      if (p[0] === 'estado') return fila(p[1], p[2], null, p[3]);
-      if (p[0] === 'total') return fila(p[1], p[2], 'ssc-total');
-      if (p[0] === 'nota') return el('span', 'ssc-note', p[1]);
-      if (p[0] === 'etiqueta') return el('span', 'ssc-badge', p[1]);
-      if (p[0] === 'alerta') return el('span', 'ssc-badge ssc-alerta', p[1]);
-      if (p[0] === 'barra') {
-        var b = el('div', 'ssc-bar');
-        var i = el('b', p[2]); i.setAttribute('data-w', p[1]);
-        b.appendChild(i);
-        return b;
-      }
+  // Cada bloque [data-ssv]: un celular con un video en bucle y botones para cambiar de video.
+  // El video solo corre cuando se ve en pantalla; con "reducir movimiento" se muestra la respuesta final (portada) y se reproduce al tocarlo.
+  var quieto = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function iniciar() { Array.prototype.forEach.call(document.querySelectorAll('[data-ssv]'), function (caja) {
+    var video = caja.querySelector('video');
+    var botones = caja.querySelectorAll('.ssv-tab');
+    var visible = false;
+    if (quieto) { video.controls = true; }
+    function reproducir() { if (!quieto && visible) { var p = video.play(); if (p && p.catch) { p.catch(function () {}); } } }
+    Array.prototype.forEach.call(botones, function (b) {
+      b.addEventListener('click', function () {
+        if (b.getAttribute('aria-pressed') === 'true') { return; }
+        Array.prototype.forEach.call(botones, function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+        var nombre = b.getAttribute('data-video');
+        video.pause();
+        video.setAttribute('poster', 'videos/' + nombre + '.jpg');
+        video.querySelector('source').setAttribute('src', 'videos/' + nombre + '.mp4');
+        video.setAttribute('aria-label', 'Video del asistente por WhatsApp: ' + b.getAttribute('data-texto'));
+        video.load();
+        visible = true;
+        reproducir();
+      });
     });
-  }
-  function llenarBarras(nodo) {
-    var bs = nodo.querySelectorAll('.ssc-bar b');
-    for (var i = 0; i < bs.length; i++) bs[i].style.width = bs[i].getAttribute('data-w') + '%';
-  }
-  function conversacionCompleta(conv) {
-    var f = document.createDocumentFragment();
-    f.appendChild(el('div', 'ssc-day', 'Hoy'));
-    f.appendChild(mensajeCliente(conv.pregunta));
-    var bot = el('div', 'ssc-bot');
-    piezas(conv).forEach(function (p) { bot.appendChild(p); });
-    bot.appendChild(meta(false));
-    llenarBarras(bot);
-    f.appendChild(bot);
-    return f;
-  }
-
-  // ---------- Alto fijo = la conversación más larga (no mueve la página) ----------
-  function medir() {
-    var caja = el('div', 'ssc-body ssc-medir');
-    caja.style.width = body.clientWidth + 'px';
-    caja.style.height = 'auto';
-    var lista = el('div', 'ssc-msgs');
-    caja.appendChild(lista);
-    card.appendChild(caja);
-    var max = 0;
-    CONVERSACIONES.forEach(function (c) {
-      lista.innerHTML = '';
-      lista.appendChild(conversacionCompleta(c));
-      max = Math.max(max, caja.offsetHeight);
-    });
-    card.removeChild(caja);
-    body.style.height = Math.ceil(max) + 'px';
-  }
-
-  // ---------- Pestañas ----------
-  var botones = CONVERSACIONES.map(function (c, i) {
-    var b = el('button', 'ssc-tab', c.tab);
-    b.type = 'button';
-    b.setAttribute('aria-pressed', 'false');
-    b.addEventListener('click', function () { reproducir(i); });
-    tabsBox.appendChild(b);
-    return b;
-  });
-  function marcar(i) {
-    botones.forEach(function (b, j) { b.setAttribute('aria-pressed', i === j ? 'true' : 'false'); });
-  }
-
-  // ---------- Pausa si no se ve (ahorra batería) ----------
-  var visible = true, esperando = [];
-  function avisarVisible() {
-    if (visible && !document.hidden) { var w = esperando; esperando = []; w.forEach(function (f) { f(); }); }
-  }
-  if ('IntersectionObserver' in window) {
-    new IntersectionObserver(function (e) { visible = e[0].isIntersecting; avisarVisible(); }).observe(card);
-  }
-  document.addEventListener('visibilitychange', avisarVisible);
-  function cuandoSeVea() {
-    return new Promise(function (ok) { (visible && !document.hidden) ? ok() : esperando.push(ok); });
-  }
-
-  // ---------- Animación ----------
-  var turno = 0;
-  function esperar(ms, t) {
-    return new Promise(function (ok, no) { setTimeout(function () { t === turno ? ok() : no('cancelado'); }, ms); });
-  }
-  function reiniciarUI() {
-    msgs.classList.remove('ssc-out');
-    msgs.innerHTML = '';
-    msgs.appendChild(el('div', 'ssc-day', 'Hoy'));
-    input.textContent = PLACEHOLDER;
-    input.classList.add('ssc-empty');
-    estado.textContent = ESTADO_BASE;
-    estado.classList.remove('ssc-on');
-    send.classList.remove('ssc-press', 'ssc-typing-on');
-  }
-
-  async function reproducir(i) {
-    var t = ++turno;
-    try {
-      while (true) {
-        var conv = CONVERSACIONES[i];
-        marcar(i);
-        reiniciarUI();
-
-        if (reducido) {
-          msgs.innerHTML = '';
-          msgs.appendChild(conversacionCompleta(conv));
-          return; // sin movimiento: se cambia solo con las pestañas
-        }
-
-        await esperar(500, t);
-        // El cliente escribe la pregunta
-        input.classList.remove('ssc-empty');
-        input.textContent = '';
-        send.classList.add('ssc-typing-on');
-        var texto = document.createTextNode('');
-        input.appendChild(texto);
-        input.appendChild(el('span', 'ssc-caret'));
-        var paso = Math.min(38, Math.round(2200 / conv.pregunta.length));
-        for (var c = 1; c <= conv.pregunta.length; c++) {
-          texto.nodeValue = conv.pregunta.slice(0, c);
-          input.scrollLeft = input.scrollWidth;
-          await esperar(paso, t);
-        }
-        await esperar(350, t);
-        send.classList.add('ssc-press');
-        await esperar(150, t);
-        send.classList.remove('ssc-press', 'ssc-typing-on');
-        input.textContent = PLACEHOLDER;
-        input.classList.add('ssc-empty');
-        input.scrollLeft = 0;
-        msgs.appendChild(mensajeCliente(conv.pregunta, ' ssc-in'));
-
-        // El agente escribe
-        await esperar(450, t);
-        estado.textContent = 'escribiendo…';
-        estado.classList.add('ssc-on');
-        var puntos = el('div', 'ssc-typing ssc-in');
-        puntos.innerHTML = '<i></i><i></i><i></i>';
-        msgs.appendChild(puntos);
-        await esperar(1300, t);
-
-        // Respuesta, línea por línea
-        msgs.removeChild(puntos);
-        estado.textContent = ESTADO_BASE;
-        estado.classList.remove('ssc-on');
-        var bot = el('div', 'ssc-bot ssc-in');
-        msgs.appendChild(bot);
-        var ps = piezas(conv);
-        ps.push(meta(false));
-        for (var k = 0; k < ps.length; k++) {
-          ps[k].classList.add('ssc-in');
-          bot.appendChild(ps[k]);
-          if (ps[k].classList.contains('ssc-bar')) {
-            (function (n) { requestAnimationFrame(function () { requestAnimationFrame(function () { llenarBarras(n); }); }); })(ps[k]);
-          }
-          await esperar(140, t);
-        }
-
-        await esperar(PAUSA_RESPUESTA, t);
-        msgs.classList.add('ssc-out');
-        await esperar(450, t);
-        await cuandoSeVea();
-        if (t !== turno) return;
-        i = (i + 1) % CONVERSACIONES.length;
-      }
-    } catch (e) { /* otra conversación tomó el turno */ }
-  }
-
-  function iniciar() {
-    medir();
-    reproducir(0);
-    var r;
-    window.addEventListener('resize', function () { clearTimeout(r); r = setTimeout(medir, 200); });
-  }
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(iniciar); else iniciar();
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entradas) {
+        entradas.forEach(function (en) {
+          visible = en.isIntersecting;
+          if (visible) { reproducir(); } else { video.pause(); }
+        });
+      }, { threshold: 0.25 }).observe(video);
+    } else { visible = true; reproducir(); }
+  }); }
+  // El script está en la portada: espera a que exista todo el HTML (el segundo celular está más abajo)
+  if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', iniciar); } else { iniciar(); }
 })();
 </script>
-<!-- ===== Chat animado del asistente (fin) ===== -->
-<span style="font-size: 13px; color: #AFC0E0">Ejemplo ilustrativo del asistente por WhatsApp</span>
+<!-- ===== Videos del asistente (fin) ===== -->
+<span style="font-size: 13px; color: #AFC0E0">Ejemplo real del asistente por WhatsApp, con datos de prueba</span>
 </div>
 </div>
 </section>
@@ -571,12 +264,25 @@ Agende una conversación</a>
 
 </div>
 
-<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; padding: 20px 24px; border-radius: 14px; border: 1px solid #C8A24B">
-<div style="flex: 1 1 360px; min-width: 0; display: flex; flex-direction: column; gap: 4px">
-<span style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 17px; color: #FFFFFF">¿Quiere ver el asistente en acción?</span>
-<span style="font-size: 15px; line-height: 1.55; color: #D5DCEC">Agende una reunión para conocer la demo y todas sus funciones.</span>
+<div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 32px 48px; padding: clamp(24px, 4vw, 40px); border-radius: 14px; border: 1px solid #C8A24B">
+<div class="ssv-wrap" data-ssv style="max-width: 300px">
+<div class="ssv-phone">
+<video muted playsinline loop preload="none" poster="videos/ventas.jpg" aria-label="Video del asistente por WhatsApp: ventas del mes">
+<source src="videos/ventas.mp4" type="video/mp4">
+</video>
 </div>
-<a href="https://wa.me/56991232170?text=Hola%2C%20quiero%20agendar%20una%20demo%20del%20asistente" style="flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 10px; background: #C8A24B; color: #0B1C4D; font-weight: 700; font-size: 15px; text-decoration: none">Agendar demo</a>
+<div class="ssv-tabs" role="group" aria-label="Elegir ejemplo">
+<button class="ssv-tab" type="button" aria-pressed="true" data-video="ventas" data-texto="ventas del mes">Ventas</button>
+<button class="ssv-tab" type="button" aria-pressed="false" data-video="f29" data-texto="proyección del F29">F29</button>
+<button class="ssv-tab" type="button" aria-pressed="false" data-video="kpi" data-texto="indicadores financieros">Indicadores</button>
+</div>
+</div>
+<div style="flex: 1 1 320px; max-width: 520px; min-width: 0; display: flex; flex-direction: column; gap: 12px">
+<span style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: clamp(20px, 2vw, 24px); color: #FFFFFF">Así responde su asistente</span>
+<span style="font-size: 16px; line-height: 1.6; color: #D5DCEC">Cada respuesta toma segundos y usa la información actualizada de su empresa: ventas, impuestos e indicadores, cuando usted lo necesite.</span>
+<span style="font-size: 15px; line-height: 1.55; color: #D5DCEC">¿Quiere verlo con sus propios números? Agende una reunión para conocer la demo y todas sus funciones.</span>
+<div style="padding-top: 6px"><a href="https://wa.me/56991232170?text=Hola%2C%20quiero%20agendar%20una%20demo%20del%20asistente" style="flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 10px; background: #C8A24B; color: #0B1C4D; font-weight: 700; font-size: 15px; text-decoration: none">Agendar demo</a></div>
+</div>
 </div>
 
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 16px; padding: 20px 24px; border-radius: 14px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.14)">
