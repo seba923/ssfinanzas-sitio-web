@@ -272,7 +272,7 @@ Agende una conversación</a>
 <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6A1F">Paso 2</span>
 <h3 id="ctz-paso2-titulo" tabindex="-1" style="margin: 0; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; color: #0B1C4D; outline: none">Cuénteme de su empresa</h3>
 <p id="ctz-plan" style="margin: 0; padding: 12px 16px; border-radius: 10px; background: #F4F6FA; font-size: 15px; color: #0B1C4D"></p>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A5568">Al enviar se abre WhatsApp o su correo con el mensaje listo; usted decide si lo envía.</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A5568">Complete sus datos y presione Enviar: me llegan directamente.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Su nombre
 <input id="f-nombre" name="f-nombre" type="text" autocomplete="name" data-requerido aria-describedby="f-nombre-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
@@ -288,14 +288,14 @@ Agende una conversación</a>
 <input id="f-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ej.: +56 9 1234 5678" data-requerido aria-describedby="f-telefono-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
 <span id="f-telefono-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
-</div>
-<fieldset aria-describedby="f-medio-error" style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 2px">
-<legend style="padding: 0; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Cómo prefiere que lo contacte? (puede marcar más de una)</legend>
+<fieldset aria-describedby="f-medio-error" style="flex: 1 1 240px; min-width: 0; margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 2px">
+<legend style="padding: 0; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Cómo prefiere que lo contacte?</legend>
 <div style="display: flex; flex-wrap: wrap; gap: 4px 24px">
 <label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: #2D3748"><input type="checkbox" name="f-medio" value="WhatsApp" id="f-medio-whatsapp" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">WhatsApp</label><label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: #2D3748"><input type="checkbox" name="f-medio" value="Correo" id="f-medio-correo" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Correo</label><label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: #2D3748"><input type="checkbox" name="f-medio" value="Llamada" id="f-medio-llamada" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Llamada</label>
 </div>
 <span id="f-medio-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </fieldset>
+</div>
 <div id="f-fila-correo" style="display: flex; flex-wrap: wrap; gap: 16px; display: none">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Su correo
 <input id="f-correo" name="correo" type="email" autocomplete="email" placeholder="Ej.: nombre@empresa.cl" data-requerido aria-describedby="f-correo-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
@@ -380,13 +380,18 @@ Agende una conversación</a>
 <textarea id="f-comentario" name="comentario" rows="3" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%; min-height: 96px; resize: vertical"></textarea>
 </label>
 <p style="margin: 0; padding: 14px 16px; border-left: 3px solid #C8A24B; background: #F4F6FA; border-radius: 0 10px 10px 0; font-size: 15px; line-height: 1.6; color: #2D3748">Después de recibir sus datos, me pondré en contacto con usted para conocer más detalles de su empresa y resolver sus dudas. Luego le pediré los documentos necesarios para empezar.</p>
+<div aria-hidden="true" style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden"><label>No complete este campo<input id="f-web" name="web" type="text" tabindex="-1" autocomplete="off"></label></div>
 <p id="f-errores" role="alert" style="margin: 0; font-size: 15px; font-weight: 600; color: #B42318"></p>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px">
-<a id="ctz-enviar-wsp" href="https://wa.me/56991232170" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 10px; font-weight: 700; font-size: 15px; text-decoration: none; background: #C8A24B; color: #0B1C4D">Enviar por WhatsApp</a>
-<a id="ctz-enviar-correo" href="mailto:sebastian@ssfinanzas.cl" style="display: inline-flex; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 10px; font-weight: 700; font-size: 15px; text-decoration: none; border: 2px solid #0B1C4D; color: #0B1C4D; background: #FFFFFF">Enviar por correo</a>
+<button type="submit" id="ctz-enviar" style="font: inherit; cursor: pointer; border: 0; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; padding: 12px 28px; border-radius: 10px; background: #C8A24B; color: #0B1C4D; font-weight: 700; font-size: 15px">Enviar mis datos</button>
 <button type="button" id="ctz-volver" style="font: inherit; cursor: pointer; border: 0; background: none; padding: 0; display: inline-flex; align-items: center; min-height: 44px; color: #0B1C4D; font-weight: 600; font-size: 15px; text-decoration: underline">← Volver al cotizador</button>
 </div>
 </form>
+<div id="ctz-gracias" role="status" tabindex="-1" style="display: none; flex-direction: column; gap: 14px; outline: none">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6A1F">Datos enviados</span>
+<h3 style="margin: 0; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; color: #0B1C4D">¡Gracias! Recibí sus datos</h3>
+<p id="ctz-gracias-texto" style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A5568"></p>
+</div>
 </div>
 </section>
 <script>
@@ -525,17 +530,40 @@ Agende una conversación</a>
     agregar('Comentario', 'f-comentario');
     return l;
   }
-  campo('ctz-enviar-wsp').addEventListener('click', function (e) {
-    if (!validar()) { e.preventDefault(); return; }
-    this.href = WSP + '?text=' + encodeURIComponent(mensaje().join('\n'));
+  var ENVIO = 'https://script.google.com/macros/s/AKfycbyCSCmx3NWBvTdWwTU8xAj5SSv4BAv9Mds2Ldu7DbNwvuWac27VTHazPUMmBIHFLv_iOw/exec';   // aplicación web de Apps Script "Cotizador sitio web" (cuenta sebastian@ssfinanzas.cl)
+  function marcados(nombre) {
+    return Array.prototype.map.call(form.querySelectorAll('input[name="' + nombre + '"]:checked'), function (c) { return c.value; }).join(', ');
+  }
+  function datos() {
+    function v(id) { var e = campo(id); return e && visible(e) ? valor(id) : ''; }
+    return { plan: resumen || 'no usó el cotizador', nombre: v('f-nombre'), empresa: v('f-empresa'), telefono: v('f-telefono'),
+      contacto: marcados('f-medio'), correo: v('f-correo'), rubro: v('f-rubro'), tipo: v('f-tipo'), regimen: v('f-regimen'),
+      contab14d8: v('f-tipo-contab'), estado: v('f-estado'), activos: v('f-activos'), activosNombre: v('f-activos-nombre'),
+      activosFecha: v('f-activos-fecha'), deudas: marcados('f-deuda'), inventario: v('f-inventario'), retiros: v('f-retiros'),
+      sii: v('f-sii'), comentario: valor('f-comentario') };
+  }
+  var enviando = false;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (enviando || !validar()) return;
+    var boton = campo('ctz-enviar'), aviso = campo('f-errores');
+    enviando = true; boton.disabled = true; boton.textContent = 'Enviando…'; aviso.textContent = '';
+    fetch(ENVIO, { method: 'POST', body: JSON.stringify({ web: valor('f-web'), datos: datos() }) })
+      .then(function (r) { return r.json(); })
+      .then(function (j) {
+        if (!j || !j.ok) throw new Error('no se guardó');
+        var medio = marcados('f-medio').toLowerCase().replace(/, ([^,]*)$/, ' o $1');
+        campo('ctz-gracias-texto').textContent = 'Lo contactaré pronto por ' + (medio || 'teléfono') +
+          ' para conocer más detalles de su empresa y resolver sus dudas. Luego le pediré los documentos necesarios para empezar.';
+        form.style.display = 'none'; campo('ctz-gracias').style.display = 'flex';
+        seccion.scrollIntoView({ block: 'start' }); campo('ctz-gracias').focus({ preventScroll: true });
+      })
+      .catch(function () {
+        enviando = false; boton.disabled = false; boton.textContent = 'Enviar mis datos';
+        aviso.innerHTML = 'No se pudo enviar. Intente de nuevo o <a href="' + WSP + '?text=' +
+          encodeURIComponent(mensaje().join('\n')) + '" target="_blank" rel="noopener" style="color: #B42318">envíeme sus datos por WhatsApp</a>.';
+      });
   });
-  campo('ctz-enviar-correo').addEventListener('click', function (e) {
-    if (!validar()) { e.preventDefault(); return; }
-    var quien = valor('f-empresa') || valor('f-nombre');
-    this.href = 'mailto:' + CORREO + '?subject=' + encodeURIComponent('Cotización servicio contable – ' + quien) +
-                '&body=' + encodeURIComponent(mensaje().join('\r\n'));
-  });
-  form.addEventListener('submit', function (e) { e.preventDefault(); validar(); });
 })();
 </script>
 
