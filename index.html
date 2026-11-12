@@ -240,6 +240,7 @@ Agende una conversación</a>
 </div>
 </section>
 
+<style>#f-deuda-resumen::-webkit-details-marker{display:none}#f-deuda-resumen::marker{content:""}</style>
 <section id="cotizador" aria-labelledby="cotizador-titulo" style="scroll-margin-top: 96px; padding: 0 24px 96px">
 <div style="max-width: 760px; margin: 0 auto; background: #FFFFFF; border: 1px solid #E1E6EF; border-radius: 16px; padding: clamp(20px, 5vw, 32px); display: flex; flex-direction: column; gap: 18px">
 <div id="ctz-paso1" style="display: flex; flex-direction: column; gap: 18px">
@@ -327,30 +328,37 @@ Agende una conversación</a>
 <span id="f-tipo-contab-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
 </div>
-<div style="display: flex; flex-wrap: wrap; gap: 16px">
-<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Tiene activos fijos? (vehículos, maquinaria, equipos)
+<div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
+<div style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<label style="flex: none; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Tiene activos fijos? (vehículos, maquinaria, equipos)
 <select id="f-activos" name="f-activos" data-requerido aria-describedby="f-activos-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Sí</option><option>No</option></select>
 <span id="f-activos-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
-<fieldset aria-describedby="f-deuda-error" style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D; margin: 0; padding: 0; border: 0">
-<legend style="padding: 0; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Qué deudas o financiamiento tiene la empresa? (puede marcar más de una)</legend>
-<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748"><input type="checkbox" name="f-deuda" value="Crédito bancario" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Crédito bancario</label>
-<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748"><input type="checkbox" name="f-deuda" value="Leasing" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Leasing</label>
-<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748"><input type="checkbox" name="f-deuda" value="Línea o tarjeta de crédito" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Línea o tarjeta de crédito</label>
-<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748"><input type="checkbox" name="f-deuda" value="Préstamo de socios o terceros" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Préstamo de socios o terceros</label>
-<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748"><input type="checkbox" name="f-deuda" value="Ninguna" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Ninguna</label>
-<span id="f-deuda-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
-</fieldset>
-</div>
-<div id="f-fila-activos" style="display: flex; flex-wrap: wrap; gap: 16px; display: none">
-<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Los activos están a nombre de la empresa?
+<div id="f-fila-activos" style="flex-direction: column; gap: 16px; display: none">
+<label style="flex: none; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Los activos están a nombre de la empresa?
 <select id="f-activos-nombre" name="f-activos-nombre" data-requerido aria-describedby="f-activos-nombre-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Sí, todos</option><option>Algunos</option><option>No</option><option>No sé</option></select>
 <span id="f-activos-nombre-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
-<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Cuándo los compró?
+<label style="flex: none; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Cuándo los compró?
 <select id="f-activos-fecha" name="f-activos-fecha" data-requerido aria-describedby="f-activos-fecha-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Este año</option><option>Años anteriores</option><option>Algunos este año y otros antes</option></select>
 <span id="f-activos-fecha-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
+</div>
+</div>
+<div style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px">
+<span id="f-deuda-titulo" style="font-size: 14px; font-weight: 600; color: #0B1C4D">¿Qué deudas o financiamiento tiene la empresa?</span>
+<details id="f-deuda-caja" style="position: relative">
+<summary id="f-deuda-resumen" aria-describedby="f-deuda-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%; list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 8px"><span id="f-deuda-texto">Elija una o más opciones</span><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none"><path d="M6 9l6 6 6-6"/></svg></summary>
+<div role="group" aria-labelledby="f-deuda-titulo" style="position: absolute; left: 0; right: 0; top: calc(100% + 4px); z-index: 5; background: #FFFFFF; border: 1px solid #C9D1E0; border-radius: 10px; box-shadow: 0 12px 28px rgba(11, 28, 77, 0.12); padding: 4px 14px">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748; cursor: pointer"><input type="checkbox" name="f-deuda" value="Crédito bancario" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Crédito bancario</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748; cursor: pointer"><input type="checkbox" name="f-deuda" value="Leasing" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Leasing</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748; cursor: pointer"><input type="checkbox" name="f-deuda" value="Línea o tarjeta de crédito" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Línea o tarjeta de crédito</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748; cursor: pointer"><input type="checkbox" name="f-deuda" value="Préstamo de socios o terceros" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Préstamo de socios o terceros</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748; cursor: pointer"><input type="checkbox" name="f-deuda" value="Ninguna" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Ninguna</label>
+</div>
+</details>
+<span id="f-deuda-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
+</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Maneja inventario? (productos en bodega)
@@ -472,7 +480,8 @@ Agende una conversación</a>
     var deudas = form.querySelectorAll('input[name="f-deuda"]');
     var algunaDeuda = Array.prototype.some.call(deudas, function (c) { return c.checked; });
     campo('f-deuda-error').textContent = algunaDeuda ? '' : 'Marque al menos una opción.';
-    if (!algunaDeuda) faltan.push(deudas[0]);
+    campo('f-deuda-resumen').style.borderColor = algunaDeuda ? '#C9D1E0' : '#B42318';
+    if (!algunaDeuda) faltan.push(campo('f-deuda-resumen'));
     faltan.sort(function (a, b) { return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1; });
     campo('f-errores').textContent = !faltan.length ? '' :
       (faltan.length === 1 ? 'Falta 1 respuesta: revise el campo marcado.' : 'Faltan ' + faltan.length + ' respuestas: revise los campos marcados.');
@@ -487,10 +496,17 @@ Agende una conversación</a>
       Array.prototype.forEach.call(form.querySelectorAll('input[name="f-deuda"]'), function (c) {
         if (c !== e && (e.value === 'Ninguna' || c.value === 'Ninguna')) c.checked = false;
       });
-      campo('f-deuda-error').textContent = '';
+      campo('f-deuda-error').textContent = ''; campo('f-deuda-resumen').style.borderColor = '#C9D1E0';
+    }
+    if (e && e.name === 'f-deuda') {
+      var marcadas = Array.prototype.map.call(form.querySelectorAll('input[name="f-deuda"]:checked'), function (c) { return c.value; });
+      campo('f-deuda-texto').textContent = marcadas.length ? marcadas.join(', ') : 'Elija una o más opciones';
     }
   }
-  form.addEventListener('input', limpiar); form.addEventListener('change', limpiar);
+  form.addEventListener('change', limpiar); form.addEventListener('input', function (ev) { if (ev.target.name !== 'f-deuda') limpiar(ev); });
+  var cajaDeuda = campo('f-deuda-caja');
+  document.addEventListener('click', function (ev) { if (cajaDeuda.open && !cajaDeuda.contains(ev.target)) cajaDeuda.open = false; });
+  cajaDeuda.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && cajaDeuda.open) { cajaDeuda.open = false; campo('f-deuda-resumen').focus(); } });
 
   // ---------- Paso 2: mensaje para WhatsApp o correo ----------
   function mensaje() {
