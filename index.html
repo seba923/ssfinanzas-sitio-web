@@ -352,6 +352,12 @@ Agende una conversación</a>
 <select id="f-inventario" name="f-inventario" data-requerido aria-describedby="f-inventario-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Sí</option><option>No</option></select>
 <span id="f-inventario-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Ha retirado dinero de la empresa para uso personal?
+<select id="f-retiros" name="f-retiros" data-requerido aria-describedby="f-retiros-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Sí</option><option>No</option></select>
+<span id="f-retiros-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
+</label>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Tiene multas, deudas o anotaciones en el SII?
 <select id="f-sii" name="f-sii" data-requerido aria-describedby="f-sii-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Sí</option><option>No</option><option>No sé</option></select>
 <span id="f-sii-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
@@ -483,7 +489,7 @@ Agende una conversación</a>
     agregar('Contabilidad que quiere llevar (14 D N°8)', 'f-tipo-contab'); agregar('Su contabilidad hoy', 'f-estado');
     agregar('Activos fijos', 'f-activos'); agregar('Activos a nombre de la empresa', 'f-activos-nombre');
     agregar('Cuándo compró los activos', 'f-activos-fecha'); agregar('Créditos, leasing u otro financiamiento', 'f-creditos');
-    agregar('Inventario', 'f-inventario'); agregar('Multas, deudas o anotaciones en el SII', 'f-sii');
+    agregar('Inventario', 'f-inventario'); agregar('Retiros de dinero para uso personal', 'f-retiros'); agregar('Multas, deudas o anotaciones en el SII', 'f-sii');
     agregar('Comentario', 'f-comentario');
     return l;
   }
