@@ -272,61 +272,61 @@ Agende una conversación</a>
 <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6A1F">Paso 2</span>
 <h3 id="ctz-paso2-titulo" tabindex="-1" style="margin: 0; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; color: #0B1C4D; outline: none">Cuénteme de su empresa</h3>
 <p id="ctz-plan" style="margin: 0; padding: 12px 16px; border-radius: 10px; background: #F4F6FA; font-size: 15px; color: #0B1C4D"></p>
-<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A5568">Complete sus datos y presione Enviar: me llegan directamente.</p>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A5568">Complete sus datos y presione Enviar.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Su nombre
 <input id="f-nombre" name="f-nombre" type="text" autocomplete="name" data-requerido aria-describedby="f-nombre-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
 <span id="f-nombre-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
-<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Nombre de la empresa (opcional)
-<input id="f-empresa" name="f-empresa" type="text" autocomplete="organization" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
-
-</label>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 16px">
-<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Teléfono de contacto
-<input id="f-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ej.: +56 9 1234 5678" data-requerido aria-describedby="f-telefono-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
-<span id="f-telefono-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
-</label>
-<fieldset aria-describedby="f-medio-error" style="flex: 1 1 240px; min-width: 0; margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 2px">
-<legend style="padding: 0; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Cómo prefiere que lo contacte?</legend>
-<div style="display: flex; flex-wrap: wrap; gap: 4px 24px">
-<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: #2D3748"><input type="checkbox" name="f-medio" value="WhatsApp" id="f-medio-whatsapp" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">WhatsApp</label><label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: #2D3748"><input type="checkbox" name="f-medio" value="Correo" id="f-medio-correo" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Correo</label><label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: #2D3748"><input type="checkbox" name="f-medio" value="Llamada" id="f-medio-llamada" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Llamada</label>
-</div>
-<span id="f-medio-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
-</fieldset>
-</div>
-<div id="f-fila-correo" style="display: flex; flex-wrap: wrap; gap: 16px; display: none">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Su correo
 <input id="f-correo" name="correo" type="email" autocomplete="email" placeholder="Ej.: nombre@empresa.cl" data-requerido aria-describedby="f-correo-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
 <span id="f-correo-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Teléfono de contacto
+<div data-borde style="display: flex; align-items: stretch; border: 1px solid #C9D1E0; border-radius: 10px; background: #FFFFFF; overflow: hidden"><span aria-hidden="true" style="display: flex; align-items: center; padding: 0 12px; background: #F4F6FA; border-right: 1px solid #C9D1E0; font-size: 16px; font-weight: 400; color: #2D3748">+56</span><input id="f-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" placeholder="9 1234 5678" aria-label="Teléfono de contacto, sin el +56" data-requerido aria-describedby="f-telefono-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 0; border-radius: 0; color: #2D3748; background: #FFFFFF; flex: 1; min-width: 0; width: auto; outline-offset: -2px"></div>
+<span id="f-telefono-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
+</label>
+<fieldset aria-describedby="f-medio-error" style="flex: 1 1 240px; min-width: 0; margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 2px">
+<legend style="padding: 0; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Cómo prefiere que lo contacte?</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 4px 24px">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: #2D3748"><input type="checkbox" name="f-medio" value="WhatsApp" id="f-medio-whatsapp" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">WhatsApp</label><label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: #2D3748"><input type="checkbox" name="f-medio" value="Llamada" id="f-medio-llamada" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Llamada</label>
+</div>
+<span id="f-medio-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
+</fieldset>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Nombre de la empresa (opcional)
+<input id="f-empresa" name="f-empresa" type="text" autocomplete="organization" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
+
+</label>
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Rubro o giro
 <input id="f-rubro" name="f-rubro" type="text" autocomplete="off" placeholder="Ej.: venta de repuestos" data-requerido aria-describedby="f-rubro-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
 <span id="f-rubro-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Tipo de empresa
 <select id="f-tipo" name="f-tipo" data-requerido aria-describedby="f-tipo-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Persona natural con giro</option><option>Empresa individual (EIRL)</option><option>SpA</option><option>Limitada (Ltda.)</option><option>Otra</option><option>No sé</option></select>
 <span id="f-tipo-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
-</div>
-<div style="display: flex; flex-wrap: wrap; gap: 16px">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Régimen tributario
 <select id="f-regimen" name="f-regimen" data-requerido aria-describedby="f-regimen-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Pro Pyme General (14 D N°3)</option><option>Pro Pyme Transparente (14 D N°8)</option><option>Régimen General (14 A)</option><option>Renta presunta</option><option>No sé</option></select>
 <span id="f-regimen-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Su contabilidad hoy
 <select id="f-estado" name="f-estado" data-requerido aria-describedby="f-estado-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Al día</option><option>Atrasada</option><option>Recién inicio actividades</option><option>No sé</option></select>
 <span id="f-estado-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
-</div>
-<div id="f-fila-contab" style="display: flex; flex-wrap: wrap; gap: 16px; display: none">
-<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">En el régimen 14 D N°8, ¿qué contabilidad quiere llevar?
+<div id="f-fila-contab" style="flex: 1 1 240px; min-width: 0; display: none">
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Contabilidad completa o simplificada?
 <select id="f-tipo-contab" name="f-tipo-contab" data-requerido aria-describedby="f-tipo-contab-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Completa</option><option>Simplificada</option><option>Quiero su recomendación</option></select>
 <span id="f-tipo-contab-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
+</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start">
 <div style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
@@ -451,17 +451,18 @@ Agende una conversación</a>
   function condiciones() {
     campo('f-fila-contab').style.display = valor('f-regimen').indexOf('14 D N°8') >= 0 ? 'flex' : 'none';
     campo('f-fila-activos').style.display = valor('f-activos') === 'Sí' ? 'flex' : 'none';
-    campo('f-fila-correo').style.display = campo('f-medio-correo').checked ? 'flex' : 'none';
   }
-  campo('f-medio-correo').addEventListener('change', condiciones);
   campo('f-regimen').addEventListener('change', condiciones);
   campo('f-activos').addEventListener('change', condiciones);
 
   // ---------- Paso 2: todo obligatorio salvo el nombre de la empresa y el comentario ----------
+  function telefonoNumero() { var d = valor('f-telefono').replace(/[^0-9]/g, ''); return (d.length === 11 && d.indexOf('56') === 0) ? d.slice(2) : d; }
+  function telefonoCompleto() { var d = telefonoNumero(); return d.length === 9 ? '+56 ' + d.slice(0, 1) + ' ' + d.slice(1, 5) + ' ' + d.slice(5) : '+56 ' + d; }
   function marcar(e, msg) {
     var s = campo(e.id + '-error'); if (s) s.textContent = msg;
-    if (msg) { e.setAttribute('aria-invalid', 'true'); e.style.borderColor = '#B42318'; }
-    else { e.removeAttribute('aria-invalid'); e.style.borderColor = '#C9D1E0'; }
+    var caja = (e.parentNode && e.parentNode.hasAttribute && e.parentNode.hasAttribute('data-borde')) ? e.parentNode : e;
+    if (msg) { e.setAttribute('aria-invalid', 'true'); caja.style.borderColor = '#B42318'; }
+    else { e.removeAttribute('aria-invalid'); caja.style.borderColor = '#C9D1E0'; }
   }
   function validar() {
     var faltan = [];
@@ -472,12 +473,8 @@ Agende una conversación</a>
         faltan.push(e);
       } else { marcar(e, ''); }
     });
-    var tel = campo('f-telefono'), digitos = tel.value.replace(/[^0-9]/g, '').length;
-    if (tel.value.trim() && (digitos < 8 || digitos > 12)) { marcar(tel, 'Revise el número, por ejemplo +56 9 1234 5678.'); faltan.push(tel); }
-    var correo = campo('f-correo');
-    if (visible(correo) && correo.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.value.trim())) {
-      marcar(correo, 'Revise el correo, por ejemplo nombre@empresa.cl.'); faltan.push(correo);
-    }
+    var tel = campo('f-telefono');
+    if (tel.value.trim() && telefonoNumero().length !== 9) { marcar(tel, 'Revise el número: son 9 dígitos, por ejemplo 9 1234 5678.'); faltan.push(tel); }
     var medios = form.querySelectorAll('input[name="f-medio"]');
     var alguno = Array.prototype.some.call(medios, function (c) { return c.checked; });
     campo('f-medio-error').textContent = alguno ? '' : 'Marque al menos una opción.';
@@ -487,6 +484,8 @@ Agende una conversación</a>
     campo('f-deuda-error').textContent = algunaDeuda ? '' : 'Marque al menos una opción.';
     campo('f-deuda-resumen').style.borderColor = algunaDeuda ? '#C9D1E0' : '#B42318';
     if (!algunaDeuda) faltan.push(campo('f-deuda-resumen'));
+    var correo = campo('f-correo');
+    if (correo.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.value.trim())) { marcar(correo, 'Revise el correo, por ejemplo nombre@empresa.cl.'); faltan.push(correo); }
     faltan.sort(function (a, b) { return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1; });
     campo('f-errores').textContent = !faltan.length ? '' :
       (faltan.length === 1 ? 'Falta 1 respuesta: revise el campo marcado.' : 'Faltan ' + faltan.length + ' respuestas: revise los campos marcados.');
@@ -517,10 +516,10 @@ Agende una conversación</a>
   function mensaje() {
     var l = ['Hola, quiero cotizar el servicio contable.', 'Cotizador: ' + (resumen || 'no lo usé')];
     function agregar(t, id) { var v = valor(id); if (v && visible(campo(id))) l.push(t + ': ' + v); }
-    agregar('Nombre', 'f-nombre'); agregar('Empresa', 'f-empresa'); agregar('Teléfono', 'f-telefono');
+    agregar('Nombre', 'f-nombre'); agregar('Empresa', 'f-empresa'); if (valor('f-telefono')) l.push('Teléfono: ' + telefonoCompleto()); agregar('Correo', 'f-correo');
     var elegidos = Array.prototype.map.call(form.querySelectorAll('input[name="f-medio"]:checked'), function (c) { return c.value; });
     if (elegidos.length) l.push('Prefiere que lo contacten por: ' + elegidos.join(', '));
-    agregar('Correo', 'f-correo'); agregar('Rubro', 'f-rubro');
+    agregar('Rubro', 'f-rubro');
     agregar('Tipo de empresa', 'f-tipo'); agregar('Régimen tributario', 'f-regimen');
     agregar('Contabilidad que quiere llevar (14 D N°8)', 'f-tipo-contab'); agregar('Su contabilidad hoy', 'f-estado');
     agregar('Activos fijos', 'f-activos'); agregar('Activos a nombre de la empresa', 'f-activos-nombre');
@@ -536,7 +535,7 @@ Agende una conversación</a>
   }
   function datos() {
     function v(id) { var e = campo(id); return e && visible(e) ? valor(id) : ''; }
-    return { plan: resumen || 'no usó el cotizador', nombre: v('f-nombre'), empresa: v('f-empresa'), telefono: v('f-telefono'),
+    return { plan: resumen || 'no usó el cotizador', nombre: v('f-nombre'), empresa: v('f-empresa'), telefono: telefonoCompleto(),
       contacto: marcados('f-medio'), correo: v('f-correo'), rubro: v('f-rubro'), tipo: v('f-tipo'), regimen: v('f-regimen'),
       contab14d8: v('f-tipo-contab'), estado: v('f-estado'), activos: v('f-activos'), activosNombre: v('f-activos-nombre'),
       activosFecha: v('f-activos-fecha'), deudas: marcados('f-deuda'), inventario: v('f-inventario'), retiros: v('f-retiros'),
