@@ -231,7 +231,7 @@ Agende una conversación</a>
 <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
 <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6A1F">Planes desde</span>
 <div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px"><span style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(34px, 4vw, 44px); line-height: 1; color: #0B1C4D">$30.000<span style="font-size: 0.5em; vertical-align: top; margin-left: 2px; color: #C8A24B">*</span></span><span style="font-size: 16px; color: #4A5568">/ mes</span></div>
-<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #4A5568">Incluye todo lo detallado en esta lista. El valor se ajusta según la cantidad de documentos y el nivel de ventas de su empresa.</p>
+<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #4A5568">Incluye todo lo detallado en esta lista. El valor se ajusta según la cantidad de documentos y el nivel de ventas de su empresa: <a href="#cotizador" style="color: #0B1C4D; font-weight: 600">calcule el suyo</a>.</p>
 <p style="margin: 0; font-size: 13px; line-height: 1.5; color: #718096">*Valor neto mensual, más IVA.</p>
 </div>
 <a href="https://wa.me/56991232170" style="flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 10px; background: #C8A24B; color: #0B1C4D; font-weight: 700; font-size: 15px; text-decoration: none">Solicitar cotización</a>
@@ -239,6 +239,67 @@ Agende una conversación</a>
 </div>
 </div>
 </section>
+
+<section id="cotizador" aria-labelledby="cotizador-titulo" style="scroll-margin-top: 96px; padding: 0 24px 96px">
+<div style="max-width: 760px; margin: 0 auto; background: #FFFFFF; border: 1px solid #E1E6EF; border-radius: 16px; padding: clamp(20px, 5vw, 32px); display: flex; flex-wrap: wrap; gap: 40px">
+<div style="flex: 1 1 100%; min-width: 0; display: flex; flex-direction: column; gap: 18px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6A1F">Cotizador</span>
+<h2 id="cotizador-titulo" style="margin: 0; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; color: #0B1C4D">Calcule el valor de su plan</h2>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A5568">Ingrese las ventas y los documentos de un mes normal de su empresa.</p>
+<form id="ctz-form" novalidate style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Ventas netas al mes ($)
+<input id="ctz-ventas" name="ventas" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 5.000.000" aria-describedby="ctz-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF">
+</label>
+<label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Documentos al mes
+<input id="ctz-docs" name="documentos" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 40" aria-describedby="ctz-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF">
+</label>
+</form>
+<p id="ctz-error" role="alert" style="margin: 0; font-size: 14px; color: #B42318; min-height: 0"></p>
+<div id="ctz-resultado" aria-live="polite" style="background: #F4F6FA; border: 1px solid #E1E6EF; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
+<span style="font-size: 14px; color: #4A5568">Valor de su plan</span>
+<span id="ctz-total" style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 32px; line-height: 1.1; color: #0B1C4D">Desde $30.000 <span style="font-size: 16px; font-weight: 600; color: #4A5568">+ IVA al mes</span></span>
+<div id="ctz-detalle" style="font-size: 14px; line-height: 1.6; color: #4A5568">Escriba sus datos y verá el valor de su plan.</div>
+</div>
+<a id="ctz-wsp" href="https://wa.me/56991232170" style="align-self: flex-start; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 10px; background: #C8A24B; color: #0B1C4D; font-weight: 700; font-size: 15px; text-decoration: none">Escribir por WhatsApp</a>
+</div>
+</div>
+</section>
+<script>
+(function () {
+  var fv = document.getElementById('ctz-ventas'), fd = document.getElementById('ctz-docs');
+  if (!fv || !fd) return;
+  var tot = document.getElementById('ctz-total'), det = document.getElementById('ctz-detalle');
+  var err = document.getElementById('ctz-error'), wsp = document.getElementById('ctz-wsp');
+  var WSP = 'https://wa.me/56991232170';
+  function num(t) { var s = String(t || '').replace(/[^0-9]/g, ''); return s === '' ? null : parseInt(s, 10); }
+  function clp(n) { return '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+  function sufijo() { return ' <span style="font-size: 16px; font-weight: 600; color: #4A5568">+ IVA al mes</span>'; }
+  function calcular() {
+    var v = num(fv.value), d = num(fd.value);
+    err.textContent = '';
+    if (v === null && d === null) {
+      tot.innerHTML = 'Desde $30.000' + sufijo();
+      det.hidden = false; det.textContent = 'Escriba sus datos y verá el valor de su plan.';
+      wsp.href = WSP; return;
+    }
+    v = v || 0; d = d || 0;
+    if (v > 20000000 || d > 150) {
+      tot.innerHTML = 'Plan a medida';
+      det.hidden = false; det.textContent = 'Para ese volumen preparo una cotización según su empresa. Escríbame y la revisamos.';
+      wsp.href = WSP + '?text=' + encodeURIComponent('Hola, quiero cotizar un plan a medida.');
+      return;
+    }
+    var pv = Math.max(v - 3000000, 0) * 0.005, pd = Math.max(d - 20, 0) * 500;
+    var total = Math.round((30000 + pv + pd) / 5000) * 5000;
+    tot.innerHTML = clp(total) + sufijo();
+    det.textContent = ''; det.hidden = true;
+    wsp.href = WSP + '?text=' + encodeURIComponent('Hola, el cotizador me dio un plan de ' + clp(total) + ' + IVA al mes. Quiero más información.');
+  }
+  fv.addEventListener('input', calcular); fd.addEventListener('input', calcular);
+  fv.addEventListener('blur', function () { var v = num(fv.value); if (v !== null) fv.value = clp(v).slice(1); });
+  document.getElementById('ctz-form').addEventListener('submit', function (e) { e.preventDefault(); calcular(); });
+})();
+</script>
 
 <section id="asistente" style="background: #FFFFFF; padding: 96px 24px; border-top: 1px solid #E1E6EF; border-bottom: 1px solid #E1E6EF">
 <div style="max-width: 1200px; margin: 0 auto; display: flex; flex-direction: column; gap: 48px">
