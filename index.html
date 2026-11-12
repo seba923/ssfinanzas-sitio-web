@@ -329,13 +329,18 @@ Agende una conversación</a>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Tiene activos fijos? (vehículos, maquinaria, equipos)
-<select id="f-activos" name="f-activos" data-requerido aria-describedby="f-activos-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Sí</option><option>No</option><option>No sé</option></select>
+<select id="f-activos" name="f-activos" data-requerido aria-describedby="f-activos-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Sí</option><option>No</option></select>
 <span id="f-activos-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
-<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Tiene créditos bancarios, leasing u otro financiamiento similar?
-<select id="f-creditos" name="f-creditos" data-requerido aria-describedby="f-creditos-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Sí</option><option>No</option><option>No sé</option></select>
-<span id="f-creditos-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
-</label>
+<fieldset aria-describedby="f-deuda-error" style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D; margin: 0; padding: 0; border: 0">
+<legend style="padding: 0; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Qué deudas o financiamiento tiene la empresa? (puede marcar más de una)</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748"><input type="checkbox" name="f-deuda" value="Crédito bancario" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Crédito bancario</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748"><input type="checkbox" name="f-deuda" value="Leasing" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Leasing</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748"><input type="checkbox" name="f-deuda" value="Línea o tarjeta de crédito" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Línea o tarjeta de crédito</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748"><input type="checkbox" name="f-deuda" value="Préstamo de socios o terceros" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Préstamo de socios o terceros</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; font-weight: 400; color: #2D3748"><input type="checkbox" name="f-deuda" value="Ninguna" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Ninguna</label>
+<span id="f-deuda-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
+</fieldset>
 </div>
 <div id="f-fila-activos" style="display: flex; flex-wrap: wrap; gap: 16px; display: none">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Los activos están a nombre de la empresa?
@@ -464,6 +469,10 @@ Agende una conversación</a>
     var alguno = Array.prototype.some.call(medios, function (c) { return c.checked; });
     campo('f-medio-error').textContent = alguno ? '' : 'Marque al menos una opción.';
     if (!alguno) faltan.push(medios[0]);
+    var deudas = form.querySelectorAll('input[name="f-deuda"]');
+    var algunaDeuda = Array.prototype.some.call(deudas, function (c) { return c.checked; });
+    campo('f-deuda-error').textContent = algunaDeuda ? '' : 'Marque al menos una opción.';
+    if (!algunaDeuda) faltan.push(deudas[0]);
     faltan.sort(function (a, b) { return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1; });
     campo('f-errores').textContent = !faltan.length ? '' :
       (faltan.length === 1 ? 'Falta 1 respuesta: revise el campo marcado.' : 'Faltan ' + faltan.length + ' respuestas: revise los campos marcados.');
@@ -474,6 +483,12 @@ Agende una conversación</a>
     var e = ev.target;
     if (e && e.hasAttribute && e.hasAttribute('data-requerido') && String(e.value || '').trim()) marcar(e, '');
     if (e && e.name === 'f-medio' && form.querySelector('input[name="f-medio"]:checked')) campo('f-medio-error').textContent = '';
+    if (e && e.name === 'f-deuda' && e.checked) {
+      Array.prototype.forEach.call(form.querySelectorAll('input[name="f-deuda"]'), function (c) {
+        if (c !== e && (e.value === 'Ninguna' || c.value === 'Ninguna')) c.checked = false;
+      });
+      campo('f-deuda-error').textContent = '';
+    }
   }
   form.addEventListener('input', limpiar); form.addEventListener('change', limpiar);
 
@@ -488,7 +503,8 @@ Agende una conversación</a>
     agregar('Tipo de empresa', 'f-tipo'); agregar('Régimen tributario', 'f-regimen');
     agregar('Contabilidad que quiere llevar (14 D N°8)', 'f-tipo-contab'); agregar('Su contabilidad hoy', 'f-estado');
     agregar('Activos fijos', 'f-activos'); agregar('Activos a nombre de la empresa', 'f-activos-nombre');
-    agregar('Cuándo compró los activos', 'f-activos-fecha'); agregar('Créditos, leasing u otro financiamiento', 'f-creditos');
+    agregar('Cuándo compró los activos', 'f-activos-fecha'); var deudasMarcadas = Array.prototype.map.call(form.querySelectorAll('input[name="f-deuda"]:checked'), function (c) { return c.value; });
+    if (deudasMarcadas.length) l.push('Deudas o financiamiento: ' + deudasMarcadas.join(', '));
     agregar('Inventario', 'f-inventario'); agregar('Retiros de dinero para uso personal', 'f-retiros'); agregar('Multas, deudas o anotaciones en el SII', 'f-sii');
     agregar('Comentario', 'f-comentario');
     return l;
