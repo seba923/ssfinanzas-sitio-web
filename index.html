@@ -246,13 +246,14 @@ Agende una conversación</a>
 <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6A1F">Cotizador · Paso 1</span>
 <h2 id="cotizador-titulo" style="margin: 0; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; color: #0B1C4D">Calcule el valor de su plan</h2>
 <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A5568">Ingrese lo que factura en promedio al mes y cuántos documentos tiene en un mes normal.</p>
-<p style="margin: -8px 0 0; font-size: 14px; line-height: 1.6; color: #4A5568">Ambos datos los encuentra en el Registro de Compras y Ventas (RCV) del SII: entre a sii.cl → Mi SII → Registro de Compras y Ventas → Ingresar al Registro de Compras y Ventas, elija el mes y pulse Consultar. Sume el total de los últimos 6 meses y divídalo por 6. Si su empresa tiene menos tiempo, use los meses que tenga.</p>
+<p style="margin: -8px 0 0; font-size: 14px; line-height: 1.6; color: #4A5568">La facturación y las facturas las encuentra en el Registro de Compras y Ventas (RCV) del SII: entre a sii.cl → Mi SII → Registro de Compras y Ventas → Ingresar al Registro de Compras y Ventas, elija el mes y pulse Consultar. Sume el total de los últimos 6 meses y divídalo por 6. Si su empresa tiene menos tiempo, use los meses que tenga. Las boletas por rendiciones súmelas aparte.</p>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Facturación mensual promedio, total con IVA ($)
 <input id="ctz-ventas" name="ventas" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 5.000.000" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
 </label>
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Documentos al mes
-<input id="ctz-docs" name="documentos" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 40" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
+<input id="ctz-docs" aria-describedby="ctz-docs-ayuda" name="documentos" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 40" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
+<span id="ctz-docs-ayuda" style="font-size: 13px; font-weight: 400; line-height: 1.4; color: #4A5568">Facturas de compra y venta + boletas por rendiciones</span>
 </label>
 </div>
 <div id="ctz-resultado" aria-live="polite" style="background: #F4F6FA; border: 1px solid #E1E6EF; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
@@ -279,6 +280,25 @@ Agende una conversación</a>
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Nombre de la empresa (opcional)
 <input id="f-empresa" name="f-empresa" type="text" autocomplete="organization" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
 
+</label>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Teléfono de contacto
+<input id="f-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" placeholder="Ej.: +56 9 1234 5678" data-requerido aria-describedby="f-telefono-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
+<span id="f-telefono-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
+</label>
+</div>
+<fieldset aria-describedby="f-medio-error" style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 2px">
+<legend style="padding: 0; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Cómo prefiere que lo contacte? (puede marcar más de una)</legend>
+<div style="display: flex; flex-wrap: wrap; gap: 4px 24px">
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: #2D3748"><input type="checkbox" name="f-medio" value="WhatsApp" id="f-medio-whatsapp" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">WhatsApp</label><label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: #2D3748"><input type="checkbox" name="f-medio" value="Correo" id="f-medio-correo" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Correo</label><label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: #2D3748"><input type="checkbox" name="f-medio" value="Llamada" id="f-medio-llamada" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Llamada</label>
+</div>
+<span id="f-medio-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
+</fieldset>
+<div id="f-fila-correo" style="display: flex; flex-wrap: wrap; gap: 16px; display: none">
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Su correo
+<input id="f-correo" name="correo" type="email" autocomplete="email" placeholder="Ej.: nombre@empresa.cl" data-requerido aria-describedby="f-correo-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
+<span id="f-correo-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
@@ -323,13 +343,13 @@ Agende una conversación</a>
 <span id="f-activos-nombre-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Cuándo los compró?
-<select id="f-activos-fecha" name="f-activos-fecha" data-requerido aria-describedby="f-activos-fecha-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Este año</option><option>Hace 1 a 3 años</option><option>Hace más de 3 años</option><option>En distintos años</option></select>
+<select id="f-activos-fecha" name="f-activos-fecha" data-requerido aria-describedby="f-activos-fecha-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Este año</option><option>Años anteriores</option><option>Algunos este año y otros antes</option></select>
 <span id="f-activos-fecha-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
 </div>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Maneja inventario? (productos en bodega)
-<select id="f-inventario" name="f-inventario" data-requerido aria-describedby="f-inventario-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Sí</option><option>No</option><option>No sé</option></select>
+<select id="f-inventario" name="f-inventario" data-requerido aria-describedby="f-inventario-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Sí</option><option>No</option></select>
 <span id="f-inventario-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Tiene multas, deudas o anotaciones en el SII?
@@ -406,7 +426,9 @@ Agende una conversación</a>
   function condiciones() {
     campo('f-fila-contab').style.display = valor('f-regimen').indexOf('14 D N°8') >= 0 ? 'flex' : 'none';
     campo('f-fila-activos').style.display = valor('f-activos') === 'Sí' ? 'flex' : 'none';
+    campo('f-fila-correo').style.display = campo('f-medio-correo').checked ? 'flex' : 'none';
   }
+  campo('f-medio-correo').addEventListener('change', condiciones);
   campo('f-regimen').addEventListener('change', condiciones);
   campo('f-activos').addEventListener('change', condiciones);
 
@@ -425,6 +447,17 @@ Agende una conversación</a>
         faltan.push(e);
       } else { marcar(e, ''); }
     });
+    var tel = campo('f-telefono'), digitos = tel.value.replace(/[^0-9]/g, '').length;
+    if (tel.value.trim() && (digitos < 8 || digitos > 12)) { marcar(tel, 'Revise el número, por ejemplo +56 9 1234 5678.'); faltan.push(tel); }
+    var correo = campo('f-correo');
+    if (visible(correo) && correo.value.trim() && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo.value.trim())) {
+      marcar(correo, 'Revise el correo, por ejemplo nombre@empresa.cl.'); faltan.push(correo);
+    }
+    var medios = form.querySelectorAll('input[name="f-medio"]');
+    var alguno = Array.prototype.some.call(medios, function (c) { return c.checked; });
+    campo('f-medio-error').textContent = alguno ? '' : 'Marque al menos una opción.';
+    if (!alguno) faltan.push(medios[0]);
+    faltan.sort(function (a, b) { return a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1; });
     campo('f-errores').textContent = !faltan.length ? '' :
       (faltan.length === 1 ? 'Falta 1 respuesta: revise el campo marcado.' : 'Faltan ' + faltan.length + ' respuestas: revise los campos marcados.');
     if (faltan.length) faltan[0].focus();
@@ -433,6 +466,7 @@ Agende una conversación</a>
   function limpiar(ev) {
     var e = ev.target;
     if (e && e.hasAttribute && e.hasAttribute('data-requerido') && String(e.value || '').trim()) marcar(e, '');
+    if (e && e.name === 'f-medio' && form.querySelector('input[name="f-medio"]:checked')) campo('f-medio-error').textContent = '';
   }
   form.addEventListener('input', limpiar); form.addEventListener('change', limpiar);
 
@@ -440,7 +474,10 @@ Agende una conversación</a>
   function mensaje() {
     var l = ['Hola, quiero cotizar el servicio contable.', 'Cotizador: ' + (resumen || 'no lo usé')];
     function agregar(t, id) { var v = valor(id); if (v && visible(campo(id))) l.push(t + ': ' + v); }
-    agregar('Nombre', 'f-nombre'); agregar('Empresa', 'f-empresa'); agregar('Rubro', 'f-rubro');
+    agregar('Nombre', 'f-nombre'); agregar('Empresa', 'f-empresa'); agregar('Teléfono', 'f-telefono');
+    var elegidos = Array.prototype.map.call(form.querySelectorAll('input[name="f-medio"]:checked'), function (c) { return c.value; });
+    if (elegidos.length) l.push('Prefiere que lo contacten por: ' + elegidos.join(', '));
+    agregar('Correo', 'f-correo'); agregar('Rubro', 'f-rubro');
     agregar('Tipo de empresa', 'f-tipo'); agregar('Régimen tributario', 'f-regimen');
     agregar('Contabilidad que quiere llevar (14 D N°8)', 'f-tipo-contab'); agregar('Su contabilidad hoy', 'f-estado');
     agregar('Activos fijos', 'f-activos'); agregar('Activos a nombre de la empresa', 'f-activos-nombre');
