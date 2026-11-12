@@ -241,27 +241,75 @@ Agende una conversación</a>
 </section>
 
 <section id="cotizador" aria-labelledby="cotizador-titulo" style="scroll-margin-top: 96px; padding: 0 24px 96px">
-<div style="max-width: 760px; margin: 0 auto; background: #FFFFFF; border: 1px solid #E1E6EF; border-radius: 16px; padding: clamp(20px, 5vw, 32px); display: flex; flex-wrap: wrap; gap: 40px">
-<div style="flex: 1 1 100%; min-width: 0; display: flex; flex-direction: column; gap: 18px">
-<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6A1F">Cotizador</span>
+<div style="max-width: 760px; margin: 0 auto; background: #FFFFFF; border: 1px solid #E1E6EF; border-radius: 16px; padding: clamp(20px, 5vw, 32px); display: flex; flex-direction: column; gap: 18px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6A1F">Cotizador · Paso 1</span>
 <h2 id="cotizador-titulo" style="margin: 0; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; color: #0B1C4D">Calcule el valor de su plan</h2>
 <p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A5568">Ingrese lo que factura en promedio al mes y cuántos documentos tiene en un mes normal.</p>
-<form id="ctz-form" novalidate style="display: flex; flex-wrap: wrap; gap: 16px">
-<label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Facturación mensual promedio, total con IVA ($)
-<input id="ctz-ventas" name="ventas" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 5.000.000" aria-describedby="ctz-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF">
+<p style="margin: -8px 0 0; font-size: 14px; line-height: 1.6; color: #4A5568">Ambos datos los encuentra en el <strong style="color: #0B1C4D">Registro de Compras y Ventas (RCV)</strong> del SII: sii.cl → Servicios online → Factura electrónica → Registro de compras y ventas. Sume el total de los últimos meses y divídalo por la cantidad de meses.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Facturación mensual promedio, total con IVA ($)
+<input id="ctz-ventas" name="ventas" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 5.000.000" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
 </label>
-<label style="flex: 1 1 200px; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Documentos al mes
-<input id="ctz-docs" name="documentos" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 40" aria-describedby="ctz-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF">
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Documentos al mes
+<input id="ctz-docs" name="documentos" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 40" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
 </label>
-</form>
-<p id="ctz-error" role="alert" style="margin: 0; font-size: 14px; color: #B42318; min-height: 0"></p>
+</div>
 <div id="ctz-resultado" aria-live="polite" style="background: #F4F6FA; border: 1px solid #E1E6EF; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
 <span style="font-size: 14px; color: #4A5568">Valor de su plan</span>
 <span id="ctz-total" style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 32px; line-height: 1.1; color: #0B1C4D">Desde $30.000 <span style="font-size: 16px; font-weight: 600; color: #4A5568">+ IVA al mes</span></span>
 <div id="ctz-detalle" style="font-size: 14px; line-height: 1.6; color: #4A5568">Escriba sus datos y verá el valor de su plan.</div>
 </div>
-<a id="ctz-wsp" href="https://wa.me/56991232170" style="align-self: flex-start; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 10px; background: #C8A24B; color: #0B1C4D; font-weight: 700; font-size: 15px; text-decoration: none">Escribir por WhatsApp</a>
+
+<form id="ctz-form" novalidate style="border-top: 1px solid #E1E6EF; margin-top: 8px; padding-top: 26px; display: flex; flex-direction: column; gap: 18px">
+<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6A1F">Paso 2</span>
+<h3 style="margin: 0; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 22px; line-height: 1.25; color: #0B1C4D">Cuénteme de su empresa</h3>
+<p style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A5568">Con estos datos le digo qué documentos necesito para empezar. Al enviar se abre WhatsApp con el mensaje listo; usted decide si lo envía.</p>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Su nombre
+<input id="f-nombre" name="nombre" type="text" autocomplete="name" aria-describedby="f-nombre-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
+<span id="f-nombre-error" role="alert" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
+</label>
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Nombre de la empresa
+<input id="f-empresa" name="f-empresa" type="text" autocomplete="organization" placeholder="" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
+</label>
 </div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Rubro o giro
+<input id="f-rubro" name="f-rubro" type="text" autocomplete="off" placeholder="Ej.: venta de repuestos" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
+</label>
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Tipo de empresa
+<select id="f-tipo" name="f-tipo" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Persona natural con giro</option><option>Empresa individual (EIRL)</option><option>SpA</option><option>Limitada (Ltda.)</option><option>Otra</option><option>No sé</option></select>
+</label>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Régimen tributario
+<select id="f-regimen" name="f-regimen" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Pro Pyme General (14 D N°3)</option><option>Pro Pyme Transparente (14 D N°8)</option><option>Régimen General (14 A)</option><option>Renta presunta</option><option>No sé</option></select>
+</label>
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Su contabilidad hoy
+<select id="f-estado" name="f-estado" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Al día</option><option>Atrasada</option><option>Recién inicio actividades</option><option>No sé</option></select>
+</label>
+</div>
+<div style="display: flex; flex-wrap: wrap; gap: 16px">
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Tiene activos fijos? (vehículos, maquinaria, equipos)
+<select id="f-activos" name="f-activos" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Sí</option><option>No</option><option>No sé</option></select>
+</label>
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Tiene créditos bancarios o leasing?
+<select id="f-creditos" name="f-creditos" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%"><option value="">Elija una opción</option><option>Sí</option><option>No</option><option>No sé</option></select>
+</label>
+</div>
+<fieldset style="margin: 0; padding: 0; border: 0; display: flex; flex-direction: column; gap: 2px">
+<legend style="padding: 0; margin-bottom: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Además, su empresa (marque si corresponde)</legend>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: #2D3748"><input id="f-comex" type="checkbox" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Importa o exporta</label>
+<label style="display: flex; align-items: center; gap: 10px; min-height: 44px; font-size: 15px; color: #2D3748"><input id="f-inventario" type="checkbox" style="width: 20px; height: 20px; margin: 0; accent-color: #0B1C4D">Maneja inventario (productos en bodega)</label>
+</fieldset>
+<label style="display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">¿Algo más que deba saber? (opcional)
+<textarea id="f-comentario" name="comentario" rows="3" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%; min-height: 96px; resize: vertical"></textarea>
+</label>
+<div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px">
+<button type="submit" style="font: inherit; cursor: pointer; border: 0; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 10px; background: #C8A24B; color: #0B1C4D; font-weight: 700; font-size: 15px">Enviar mis datos por WhatsApp</button>
+<a id="ctz-wsp" href="https://wa.me/56991232170" style="display: inline-flex; align-items: center; min-height: 44px; color: #0B1C4D; font-weight: 600; font-size: 15px">O escríbame directo por WhatsApp</a>
+</div>
+</form>
 </div>
 </section>
 <script>
@@ -269,35 +317,61 @@ Agende una conversación</a>
   var fv = document.getElementById('ctz-ventas'), fd = document.getElementById('ctz-docs');
   if (!fv || !fd) return;
   var tot = document.getElementById('ctz-total'), det = document.getElementById('ctz-detalle');
-  var err = document.getElementById('ctz-error'), wsp = document.getElementById('ctz-wsp');
+  var wsp = document.getElementById('ctz-wsp'), form = document.getElementById('ctz-form');
   var WSP = 'https://wa.me/56991232170';
+  var resumen = '';   // lo que dio el cotizador, para el mensaje del paso 2
   function num(t) { var s = String(t || '').replace(/[^0-9]/g, ''); return s === '' ? null : parseInt(s, 10); }
   function clp(n) { return '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
   function sufijo() { return ' <span style="font-size: 16px; font-weight: 600; color: #4A5568">+ IVA al mes</span>'; }
   function calcular() {
     var v = num(fv.value), d = num(fd.value);
-    err.textContent = '';
     if (v === null && d === null) {
       tot.innerHTML = 'Desde $30.000' + sufijo();
       det.hidden = false; det.textContent = 'Escriba sus datos y verá el valor de su plan.';
-      wsp.href = WSP; return;
+      resumen = ''; wsp.href = WSP; return;
     }
     v = v || 0; d = d || 0;
+    var datos = ' (facturación ' + clp(v) + ', ' + d + ' documentos al mes)';
     if (v > 20000000 || d > 150) {
       tot.innerHTML = 'Plan a medida';
       det.hidden = false; det.textContent = 'Para ese volumen preparo una cotización según su empresa. Escríbame y la revisamos.';
+      resumen = 'Plan a medida' + datos;
       wsp.href = WSP + '?text=' + encodeURIComponent('Hola, quiero cotizar un plan a medida.');
       return;
     }
-    var pv = Math.max(v - 3000000, 0) * 0.005, pd = Math.max(d - 20, 0) * 500;
-    var total = Math.round((30000 + pv + pd) / 5000) * 5000;
+    var total = Math.round((30000 + Math.max(v - 3000000, 0) * 0.005 + Math.max(d - 20, 0) * 500) / 5000) * 5000;
     tot.innerHTML = clp(total) + sufijo();
     det.textContent = ''; det.hidden = true;
+    resumen = clp(total) + ' + IVA al mes' + datos;
     wsp.href = WSP + '?text=' + encodeURIComponent('Hola, el cotizador me dio un plan de ' + clp(total) + ' + IVA al mes. Quiero más información.');
   }
   fv.addEventListener('input', calcular); fd.addEventListener('input', calcular);
   fv.addEventListener('blur', function () { var v = num(fv.value); if (v !== null) fv.value = clp(v).slice(1); });
-  document.getElementById('ctz-form').addEventListener('submit', function (e) { e.preventDefault(); calcular(); });
+
+  function valor(id) { var e = document.getElementById(id); return e ? String(e.value || '').trim() : ''; }
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nombre = document.getElementById('f-nombre'), error = document.getElementById('f-nombre-error');
+    if (!valor('f-nombre')) {
+      error.textContent = 'Escriba su nombre para saber con quién hablo.';
+      nombre.setAttribute('aria-invalid', 'true'); nombre.focus(); return;
+    }
+    error.textContent = ''; nombre.removeAttribute('aria-invalid');
+    var lineas = ['Hola, quiero cotizar el servicio contable.',
+                  'Cotizador: ' + (resumen || 'no lo usé')];
+    [['Nombre', 'f-nombre'], ['Empresa', 'f-empresa'], ['Rubro', 'f-rubro'], ['Tipo de empresa', 'f-tipo'],
+     ['Régimen tributario', 'f-regimen'], ['Contabilidad', 'f-estado'], ['Activos fijos', 'f-activos'],
+     ['Créditos o leasing', 'f-creditos']].forEach(function (c) { var v = valor(c[1]); if (v) lineas.push(c[0] + ': ' + v); });
+    var ademas = [];
+    if (document.getElementById('f-comex').checked) ademas.push('importa o exporta');
+    if (document.getElementById('f-inventario').checked) ademas.push('maneja inventario');
+    if (ademas.length) lineas.push('Además: ' + ademas.join(' y '));
+    if (valor('f-comentario')) lineas.push('Comentario: ' + valor('f-comentario'));
+    window.open(WSP + '?text=' + encodeURIComponent(lineas.join('\n')), '_blank', 'noopener');
+  });
+  document.getElementById('f-nombre').addEventListener('input', function () {
+    if (valor('f-nombre')) { document.getElementById('f-nombre-error').textContent = ''; this.removeAttribute('aria-invalid'); }
+  });
 })();
 </script>
 
