@@ -460,6 +460,17 @@ Agende una conversación</a>
     if (faltaV || faltaD) { sinCotizar(); (faltaV ? fv : fd).focus(); return false; }
     calcular(); registrar('Calculó'); return true;
   }
+  // Puntos de miles mientras escribe la facturación, sin mover el cursor de lugar
+  fv.addEventListener('input', function () {
+    var pos = fv.selectionStart || 0, digitosAntes = fv.value.slice(0, pos).replace(/[^0-9]/g, '').length;
+    var d = fv.value.replace(/[^0-9]/g, '').replace(/^0+(?=\d)/, '');
+    var nuevo = d.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+    if (nuevo === fv.value) return;
+    fv.value = nuevo;
+    var i = 0, vistos = 0;
+    while (i < nuevo.length && vistos < digitosAntes) { if (nuevo.charAt(i) !== '.') vistos++; i++; }
+    try { fv.setSelectionRange(i, i); } catch (e) {}
+  });
   cotizar.addEventListener('click', pulsarCotizar);
   [fv, fd].forEach(function (e) {
     e.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); pulsarCotizar(); } });
