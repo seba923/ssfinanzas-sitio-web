@@ -8,6 +8,7 @@
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="favicon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&amp;family=Montserrat:wght@600;700;800&amp;display=swap" rel="stylesheet">
 <style>
 body{margin:0;background:#F4F6FA}
@@ -45,7 +46,7 @@ html{scroll-behavior:smooth}
 <header style="background: #0B1C4D; color: #FFFFFF; border-bottom: 1px solid rgba(255,255,255,0.08)">
 <div style="max-width: 1200px; margin: 0 auto; padding: 16px 24px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px">
 <a href="#inicio" style="display: flex; align-items: center; gap: 12px; text-decoration: none; color: #FFFFFF">
-<img src="logo-aguila.png" alt="" width="45" height="52" style="display: block; height: 52px; width: auto">
+<img src="logo-aguila.webp" alt="" width="45" height="52" style="display: block; height: 52px; width: auto">
 <div style="display: flex; flex-direction: column; gap: 2px; line-height: 1.1">
 <span style="font-family: Montserrat, sans-serif; font-weight: 700; font-size: 17px">Asesorías San Sebastián</span>
 <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #C8A24B">SSFinanzas</span>
@@ -61,6 +62,7 @@ html{scroll-behavior:smooth}
 </nav>
 </div>
 </header>
+<main id="contenido">
 
 <section id="inicio" style="background: #0B1C4D; color: #FFFFFF">
 <div style="max-width: 1200px; margin: 0 auto; padding: 72px 24px 104px; display: flex; flex-wrap: wrap; align-items: center; gap: 56px">
@@ -106,7 +108,7 @@ Agende una conversación</a>
 </style>
 <div class="ssv-wrap" data-ssv>
 <div class="ssv-phone" tabindex="0" role="button" aria-pressed="false" aria-label="Pausar o continuar el video">
-<video muted playsinline loop preload="none" poster="flujo.jpg" aria-label="Video del asistente por WhatsApp: proyección del flujo de caja">
+<video muted playsinline loop preload="none" poster="flujo.webp" aria-label="Video del asistente por WhatsApp: proyección del flujo de caja">
 <source src="flujo.mp4" type="video/mp4">
 </video>
 <span class="ssv-estado" aria-hidden="true"><span class="ssv-e-pausa"><svg viewBox="0 0 12 12"><rect x="1.5" y="1" width="3" height="10" rx="1"/><rect x="7.5" y="1" width="3" height="10" rx="1"/></svg>En pausa</span><span class="ssv-e-play"><svg viewBox="0 0 12 12"><path d="M2.5 1.2v9.6L10.5 6z"/></svg>Toque para continuar</span></span>
@@ -178,7 +180,7 @@ Agende una conversación</a>
         Array.prototype.forEach.call(botones, function (x) { x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
         var nombre = b.getAttribute('data-video');
         video.pause();
-        video.setAttribute('poster', nombre + '.jpg');
+        video.setAttribute('poster', nombre + '.webp');
         video.querySelector('source').setAttribute('src', nombre + '.mp4');
         video.setAttribute('aria-label', 'Video del asistente por WhatsApp: ' + b.getAttribute('data-texto'));
         video.load();
@@ -729,7 +731,7 @@ Agende una conversación</a>
 <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 32px 48px; padding: clamp(24px, 4vw, 40px); border-radius: 14px; border: 1px solid #C8A24B">
 <div class="ssv-wrap" data-ssv style="max-width: 300px">
 <div class="ssv-phone" tabindex="0" role="button" aria-pressed="false" aria-label="Pausar o continuar el video">
-<video muted playsinline loop preload="none" poster="ventas.jpg" aria-label="Video del asistente por WhatsApp: ventas del mes">
+<video muted playsinline loop preload="none" poster="ventas.webp" aria-label="Video del asistente por WhatsApp: ventas del mes">
 <source src="ventas.mp4" type="video/mp4">
 </video>
 <span class="ssv-estado" aria-hidden="true"><span class="ssv-e-pausa"><svg viewBox="0 0 12 12"><rect x="1.5" y="1" width="3" height="10" rx="1"/><rect x="7.5" y="1" width="3" height="10" rx="1"/></svg>En pausa</span><span class="ssv-e-play"><svg viewBox="0 0 12 12"><path d="M2.5 1.2v9.6L10.5 6z"/></svg>Toque para continuar</span></span>
@@ -847,6 +849,8 @@ sebastian@ssfinanzas.cl</a>
 </div>
 </div>
 </section>
+
+</main>
 
 <footer style="background: #081538; color: #AFC0E0; padding: 48px 24px 28px">
 <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 32px; font-size: 14px; line-height: 1.6">
