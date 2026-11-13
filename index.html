@@ -435,7 +435,8 @@ Agende una conversación</a>
       wsp.href = WSP + '?text=' + encodeURIComponent('Hola, quiero cotizar un plan a medida.');
       return;
     }
-    var total = Math.round((30000 + porFacturacion(v) + Math.max(d - 20, 0) * 500) / 5000) * 5000;
+    var docsCobrados = v > 3000000 ? d : Math.max(d - 20, 0);   // sobre $3.000.000 se cobran todos los documentos
+    var total = Math.round((30000 + porFacturacion(v) + docsCobrados * 500) / 5000) * 5000;
     tot.innerHTML = clp(total) + sufijo();
     det.textContent = ''; det.hidden = true;
     resumen = clp(total) + ' + IVA al mes' + datos;
