@@ -56,7 +56,7 @@ html{scroll-behavior:smooth}
 <a href="#asistente" style="color: #FFFFFF; text-decoration: none; padding: 12px 0">Su asistente</a>
 <a href="#proceso" style="color: #FFFFFF; text-decoration: none; padding: 12px 0">Cómo trabajo</a>
 <a href="#por-que" style="color: #FFFFFF; text-decoration: none; padding: 12px 0">Ventajas</a>
-<a href="#planes" style="color: #FFFFFF; text-decoration: none; padding: 12px 0">Planes</a>
+<a href="#cotizador" style="color: #FFFFFF; text-decoration: none; padding: 12px 0">Cotizador</a>
 <a href="https://wa.me/56991232170" style="display: inline-flex; align-items: center; min-height: 44px; box-sizing: border-box; padding: 10px 18px; border-radius: 8px; background: #C8A24B; color: #0B1C4D; font-weight: 700; text-decoration: none">Conversemos</a>
 </nav>
 </div>
@@ -205,15 +205,20 @@ Agende una conversación</a>
 </div>
 </section>
 
+<style>
+.ss-servicio{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1fr);grid-template-areas:"texto" "cotizador" "incluye";gap:40px;align-items:start}
+.ss-texto{grid-area:texto;min-width:0}.ss-incluye{grid-area:incluye;min-width:0}.ss-cotizador{grid-area:cotizador;min-width:0}
+@media (min-width:960px){.ss-servicio{grid-template-columns:minmax(0,1.618fr) minmax(0,1fr);grid-template-areas:"texto texto" "cotizador incluye";column-gap:40px;row-gap:40px}}
+#f-deuda-resumen::-webkit-details-marker{display:none}#f-deuda-resumen::marker{content:""}
+</style>
 <section id="servicio" style="padding: 96px 24px">
-<div style="max-width: 1200px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: flex-start; gap: 48px">
-<div style="flex: 1 1 480px; min-width: 0; display: flex; flex-direction: column; gap: 16px">
+<div class="ss-servicio">
+<div class="ss-texto" id="planes" style="scroll-margin-top: 96px; display: flex; flex-direction: column; gap: 12px">
 <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6A1F">El servicio</span>
-<h2 style="margin: 0; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.15; color: #0B1C4D">Externalice su contabilidad sin perder el control de sus números</h2>
-<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #4A5568">Llevo la contabilidad completa de su empresa, apoyado en procesos automatizados: la información del SII se incorpora de forma ordenada, las declaraciones se preparan a tiempo y los informes se generan sin demoras.</p>
-<p style="margin: 0; font-size: 17px; line-height: 1.65; color: #4A5568">El resultado es una contabilidad siempre actualizada y un asistente por WhatsApp que le entrega sus reportes y responde sus consultas con la información real de su empresa.</p>
+<h2 style="margin: 0; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.15; color: #0B1C4D">Planes desde $30.000 <span style="display: inline-block; white-space: nowrap; font-size: 0.5em; font-weight: 700; color: #4A5568">+ IVA al mes</span></h2>
+<p style="margin: 0; max-width: 62ch; font-size: 17px; line-height: 1.65; color: #4A5568">El valor depende de la facturación y la cantidad de documentos de su empresa. Calcule el suyo y revise todo lo que incluye.</p>
 </div>
-<div style="flex: 1 1 400px; min-width: 0; background: #FFFFFF; border: 1px solid #E1E6EF; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 18px">
+<div class="ss-incluye" style="background: #FFFFFF; border: 1px solid #E1E6EF; border-radius: 16px; padding: 32px; display: flex; flex-direction: column; gap: 18px">
 <h3 style="margin: 0; font-family: Montserrat, sans-serif; font-weight: 700; font-size: 20px; color: #0B1C4D">El servicio contable incluye</h3>
 <div style="display: flex; flex-direction: column; gap: 14px; font-size: 16px; line-height: 1.5">
 <div style="display: flex; gap: 12px; align-items: flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A6A1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l4 4 10-10"></path></svg><span>Contabilidad completa, independiente de su régimen tributario</span></div>
@@ -227,22 +232,8 @@ Agende una conversación</a>
 <div style="display: flex; gap: 12px; align-items: flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A6A1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l4 4 10-10"></path></svg><span>Dashboard financiero</span></div>
 <div style="display: flex; gap: 12px; align-items: flex-start"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8A6A1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex: none; margin-top: 2px"><path d="M5 12l4 4 10-10"></path></svg><span>Asistente financiero por WhatsApp</span></div>
 </div>
-<div id="planes" style="scroll-margin-top: 96px; border-top: 1px solid #E1E6EF; padding-top: 22px; margin-top: 4px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 18px">
-<div style="display: flex; flex-direction: column; gap: 6px; min-width: 0">
-<span style="font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6A1F">Planes desde</span>
-<div style="display: flex; flex-wrap: wrap; align-items: baseline; gap: 8px"><span style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(34px, 4vw, 44px); line-height: 1; color: #0B1C4D">$30.000<span style="font-size: 0.5em; vertical-align: top; margin-left: 2px; color: #C8A24B">*</span></span><span style="font-size: 16px; color: #4A5568">/ mes</span></div>
-<p style="margin: 0; font-size: 14px; line-height: 1.5; color: #4A5568">Incluye todo lo detallado en esta lista. El valor se ajusta según la cantidad de documentos y el nivel de ventas de su empresa: <a href="#cotizador" style="color: #0B1C4D; font-weight: 600">calcule el suyo</a>.</p>
-<p style="margin: 0; font-size: 13px; line-height: 1.5; color: #718096">*Valor neto mensual, más IVA.</p>
 </div>
-<a href="https://wa.me/56991232170" style="flex: 0 0 auto; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 10px; background: #C8A24B; color: #0B1C4D; font-weight: 700; font-size: 15px; text-decoration: none">Solicitar cotización</a>
-</div>
-</div>
-</div>
-</section>
-
-<style>#f-deuda-resumen::-webkit-details-marker{display:none}#f-deuda-resumen::marker{content:""}</style>
-<section id="cotizador" aria-labelledby="cotizador-titulo" style="scroll-margin-top: 96px; padding: 0 24px 96px">
-<div style="max-width: 760px; margin: 0 auto; background: #FFFFFF; border: 1px solid #E1E6EF; border-radius: 16px; padding: clamp(20px, 5vw, 32px); display: flex; flex-direction: column; gap: 18px">
+<div id="cotizador" class="ss-cotizador" role="region" aria-labelledby="cotizador-titulo" style="scroll-margin-top: 96px; background: #FFFFFF; border: 1px solid #E1E6EF; border-radius: 16px; padding: clamp(20px, 5vw, 32px); display: flex; flex-direction: column; gap: 18px">
 <div id="ctz-paso1" style="display: flex; flex-direction: column; gap: 18px">
 <span style="font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #8A6A1F">Cotizador · Paso 1</span>
 <h2 id="cotizador-titulo" style="margin: 0; font-family: Montserrat, sans-serif; font-weight: 800; font-size: clamp(24px, 3vw, 32px); line-height: 1.2; color: #0B1C4D">Calcule el valor de su plan</h2>
@@ -257,7 +248,7 @@ Agende una conversación</a>
 </ol>
 </details>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
-<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Facturación mensual promedio, total con IVA ($)
+<label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Facturación mensual con IVA ($)
 <input id="ctz-ventas" name="ventas" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 5.000.000" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
 </label>
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Documentos al mes
@@ -401,6 +392,7 @@ Agende una conversación</a>
 <p id="ctz-gracias-texto" style="margin: 0; font-size: 16px; line-height: 1.6; color: #4A5568"></p>
 </div>
 </div>
+</div>
 </section>
 <script>
 (function () {
@@ -424,7 +416,10 @@ Agende una conversación</a>
       resumen = ''; wsp.href = WSP; return;
     }
     v = v || 0; d = d || 0;
-    var datos = ' (facturación ' + clp(v) + ', ' + d + ' documentos al mes)';
+    var partes = [];
+    if (num(fv.value) !== null) partes.push('facturación ' + clp(v));
+    if (num(fd.value) !== null) partes.push(d + ' documentos al mes');
+    var datos = partes.length ? ' (' + partes.join(', ') + ')' : '';
     if (v > 20000000 || d > 150) {
       tot.innerHTML = 'Plan a medida';
       det.hidden = false; det.textContent = 'Para ese volumen preparo una cotización según su empresa. Escríbame y la revisamos.';
