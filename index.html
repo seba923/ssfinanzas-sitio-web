@@ -258,13 +258,14 @@ Agende una conversación</a>
 <span id="ctz-docs-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
 </div>
+<button type="button" id="ctz-cotizar" style="align-self: flex-start; font: inherit; cursor: pointer; border: 2px solid #C8A24B; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; padding: 10px 32px; border-radius: 10px; background: #C8A24B; color: #0B1C4D; font-weight: 700; font-size: 15px">Cotizar</button>
 <div id="ctz-resultado" aria-live="polite" style="background: #F4F6FA; border: 1px solid #E1E6EF; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
 <span style="font-size: 14px; color: #4A5568">Valor de su plan</span>
 <span id="ctz-total" style="font-family: Montserrat, sans-serif; font-weight: 800; font-size: 32px; line-height: 1.1; color: #0B1C4D">Desde $30.000 <span style="font-size: 16px; font-weight: 600; color: #4A5568">+ IVA al mes</span></span>
-<div id="ctz-detalle" style="font-size: 14px; line-height: 1.6; color: #4A5568">Escriba sus datos y verá el valor de su plan.</div>
+<div id="ctz-detalle" style="font-size: 14px; line-height: 1.6; color: #4A5568">Ingrese sus datos y presione «Cotizar».</div>
 </div>
 <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px">
-<button type="button" id="ctz-avanzar" style="font: inherit; cursor: pointer; border: 0; display: inline-flex; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 10px; background: #C8A24B; color: #0B1C4D; font-weight: 700; font-size: 15px">Avanzar con este plan</button>
+<button type="button" id="ctz-avanzar" style="font: inherit; cursor: pointer; border: 0; display: none; align-items: center; justify-content: center; min-height: 48px; box-sizing: border-box; padding: 12px 24px; border-radius: 10px; background: #C8A24B; color: #0B1C4D; font-weight: 700; font-size: 15px">Avanzar con este plan</button>
 <a id="ctz-wsp" href="https://wa.me/56991232170" style="display: inline-flex; align-items: center; min-height: 44px; color: #0B1C4D; font-weight: 600; font-size: 15px">O escríbame directo por WhatsApp</a>
 </div>
 </div>
@@ -415,18 +416,22 @@ Agende una conversación</a>
   var TRAMOS = [[3000000, 5000000, 0.005], [5000000, 10000000, 0.01], [10000000, 15000000, 0.015], [15000000, 20000000, 0.02]];
   function porFacturacion(v) { return TRAMOS.reduce(function (s, t) { return s + Math.max(0, Math.min(v, t[1]) - t[0]) * t[2]; }, 0); }
   function sufijo() { return ' <span style="font-size: 16px; font-weight: 600; color: #4A5568">+ IVA al mes</span>'; }
+  // El valor aparece solo al pulsar «Cotizar»; si cambia un dato, vuelve a pedirlo.
+  var cotizar = campo('ctz-cotizar');
+  function estiloCotizar(principal) {   // dorado mientras falta cotizar; con contorno cuando ya hay un valor
+    cotizar.style.background = principal ? '#C8A24B' : 'transparent';
+    cotizar.style.borderColor = principal ? '#C8A24B' : '#0B1C4D';
+  }
+  function sinCotizar() {
+    tot.innerHTML = 'Desde $30.000' + sufijo();
+    det.hidden = false; det.textContent = 'Ingrese sus datos y presione «Cotizar».';
+    resumen = ''; cotizado = null; wsp.href = WSP;
+    avanzar.style.display = 'none'; estiloCotizar(true);
+  }
   function calcular() {
-    var v = num(fv.value), d = num(fd.value);
-    if (v === null && d === null) {
-      tot.innerHTML = 'Desde $30.000' + sufijo();
-      det.hidden = false; det.textContent = 'Escriba sus datos y verá el valor de su plan.';
-      resumen = ''; cotizado = null; wsp.href = WSP; return;
-    }
-    v = v || 0; d = d || 0;
-    var partes = [];
-    if (num(fv.value) !== null) partes.push('facturación ' + clp(v));
-    if (num(fd.value) !== null) partes.push(d + ' documentos al mes');
-    var datos = partes.length ? ' (' + partes.join(', ') + ')' : '';
+    var v = num(fv.value) || 0, d = num(fd.value) || 0;
+    var datos = ' (facturación ' + clp(v) + ', ' + d + ' documentos al mes)';
+    avanzar.style.display = 'inline-flex'; estiloCotizar(false);
     if (v > 20000000 || d > 150) {
       tot.innerHTML = 'Plan a medida';
       det.hidden = false; det.textContent = 'Para ese volumen preparo una cotización según su empresa. Escríbame y la revisamos.';
@@ -443,44 +448,47 @@ Agende una conversación</a>
     cotizado = { plan: clp(total) + ' + IVA al mes', facturacion: clp(v), documentos: String(d), registro: { facturacion: v, documentos: d, plan: total } };
     wsp.href = WSP + '?text=' + encodeURIComponent('Hola, el cotizador me dio un plan de ' + clp(total) + ' + IVA al mes. Quiero más información.');
   }
-  fv.addEventListener('input', calcular); fd.addEventListener('input', calcular);
+  function avisoCotizador(id, msg) {
+    var e = campo(id); campo(id + '-error').textContent = msg;
+    e.style.borderColor = msg ? '#B42318' : '#C9D1E0';
+    if (msg) e.setAttribute('aria-invalid', 'true'); else e.removeAttribute('aria-invalid');
+  }
+  function pulsarCotizar() {
+    var faltaV = num(fv.value) === null, faltaD = num(fd.value) === null;
+    avisoCotizador('ctz-ventas', faltaV ? 'Ingrese su facturación mensual.' : '');
+    avisoCotizador('ctz-docs', faltaD ? 'Ingrese sus documentos al mes.' : '');
+    if (faltaV || faltaD) { sinCotizar(); (faltaV ? fv : fd).focus(); return false; }
+    calcular(); registrar('Calculó'); return true;
+  }
+  cotizar.addEventListener('click', pulsarCotizar);
+  [fv, fd].forEach(function (e) {
+    e.addEventListener('keydown', function (ev) { if (ev.key === 'Enter') { ev.preventDefault(); pulsarCotizar(); } });
+    e.addEventListener('input', function () {
+      if (num(e.value) !== null) avisoCotizador(e.id, '');
+      if (cotizado) sinCotizar();
+    });
+  });
   fv.addEventListener('blur', function () { var v = num(fv.value); if (v !== null) fv.value = clp(v).slice(1); });
 
-  // ---------- Registro de cada cálculo en la pestaña "Cotizaciones" de la planilla, aunque no envíe sus datos ----------
+  // ---------- Registro de cada cotización en la pestaña "Cotizaciones" de la planilla, aunque no envíe sus datos ----------
   // Solo facturación, documentos y valor del plan, con un código al azar de esta visita (no se guarda en el navegador).
-  var VISITA = Math.random().toString(36).slice(2, 10), ultimoRegistro = '', esperaRegistro = null, registros = 0;
+  var VISITA = Math.random().toString(36).slice(2, 10), ultimoRegistro = '', registros = 0;
   function cotizacion(accion) {
     if (!cotizado) return null;
     var r = cotizado.registro;
     return { visita: VISITA, accion: accion, facturacion: r.facturacion, documentos: r.documentos, plan: r.plan };
   }
   function registrar(accion) {
-    clearTimeout(esperaRegistro); esperaRegistro = null;
-    if (num(fv.value) === null || num(fd.value) === null) return;
-    calcular();
     var c = cotizacion(accion), clave = c ? [c.facturacion, c.documentos, accion].join('|') : '';
     if (!c || clave === ultimoRegistro || registros >= 20) return;
     ultimoRegistro = clave; registros++;
     try { fetch(ENVIO, { method: 'POST', keepalive: true, body: JSON.stringify({ tipo: 'cotizacion', cotizacion: c }) }).catch(function () {}); } catch (e) {}
   }
-  function registrarLuego() { clearTimeout(esperaRegistro); esperaRegistro = setTimeout(function () { registrar('Calculó'); }, 2500); }
-  fv.addEventListener('input', registrarLuego); fd.addEventListener('input', registrarLuego);
-  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden' && esperaRegistro) registrar('Calculó'); });
 
   // ---------- Cambio entre paso 1 y paso 2 ----------
   form.style.display = 'none';
-  function avisoCotizador(id, msg) {
-    var e = campo(id); campo(id + '-error').textContent = msg;
-    e.style.borderColor = msg ? '#B42318' : '#C9D1E0';
-    if (msg) e.setAttribute('aria-invalid', 'true'); else e.removeAttribute('aria-invalid');
-  }
-  fv.addEventListener('input', function () { if (num(fv.value) !== null) avisoCotizador('ctz-ventas', ''); });
-  fd.addEventListener('input', function () { if (num(fd.value) !== null) avisoCotizador('ctz-docs', ''); });
   avanzar.addEventListener('click', function () {
-    var faltaV = num(fv.value) === null, faltaD = num(fd.value) === null;
-    avisoCotizador('ctz-ventas', faltaV ? 'Ingrese su facturación mensual.' : '');
-    avisoCotizador('ctz-docs', faltaD ? 'Ingrese sus documentos al mes.' : '');
-    if (faltaV || faltaD) { (faltaV ? fv : fd).focus(); return; }
+    if (!cotizado && !pulsarCotizar()) return;
     registrar('Pulsó Avanzar');
     plan.innerHTML = '';
     var l1 = document.createElement('strong'); l1.textContent = 'Plan cotizado: ' + cotizado.plan;
