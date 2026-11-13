@@ -403,13 +403,17 @@ Agende una conversación</a>
   function campo(id) { return document.getElementById(id); }
   var tot = campo('ctz-total'), det = campo('ctz-detalle'), wsp = campo('ctz-wsp'), form = campo('ctz-form');
   var WSP = 'https://wa.me/56991232170', CORREO = 'sebastian@ssfinanzas.cl';
+  var ENVIO = 'https://script.google.com/macros/s/AKfycbyCSCmx3NWBvTdWwTU8xAj5SSv4BAv9Mds2Ldu7DbNwvuWac27VTHazPUMmBIHFLv_iOw/exec';   // aplicación web de Apps Script "Cotizador sitio web" (cuenta sebastian@ssfinanzas.cl)
   var resumen = '';   // lo que dio el cotizador, para el mensaje del paso 2
-  var cotizado = null;   // { plan, facturacion, documentos } del cotizador
+  var cotizado = null;   // { plan, facturacion, documentos, registro } del cotizador
   var paso1 = campo('ctz-paso1'), seccion = campo('cotizador'), avanzar = campo('ctz-avanzar'), plan = campo('ctz-plan');
 
   // ---------- Paso 1: cotizador (fórmula interna: PRECIOS.md del repositorio del bot) ----------
   function num(t) { var s = String(t || '').replace(/[^0-9]/g, ''); return s === '' ? null : parseInt(s, 10); }
   function clp(n) { return '$' + Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+  // Tramos de la facturación: cada porcentaje se cobra solo sobre la parte que cae en su tramo
+  var TRAMOS = [[3000000, 5000000, 0.005], [5000000, 10000000, 0.01], [10000000, 15000000, 0.015], [15000000, 20000000, 0.02]];
+  function porFacturacion(v) { return TRAMOS.reduce(function (s, t) { return s + Math.max(0, Math.min(v, t[1]) - t[0]) * t[2]; }, 0); }
   function sufijo() { return ' <span style="font-size: 16px; font-weight: 600; color: #4A5568">+ IVA al mes</span>'; }
   function calcular() {
     var v = num(fv.value), d = num(fd.value);
@@ -427,19 +431,40 @@ Agende una conversación</a>
       tot.innerHTML = 'Plan a medida';
       det.hidden = false; det.textContent = 'Para ese volumen preparo una cotización según su empresa. Escríbame y la revisamos.';
       resumen = 'Plan a medida' + datos;
-      cotizado = { plan: 'Plan a medida', facturacion: clp(v), documentos: String(d) };
+      cotizado = { plan: 'Plan a medida', facturacion: clp(v), documentos: String(d), registro: { facturacion: v, documentos: d, plan: 'A medida' } };
       wsp.href = WSP + '?text=' + encodeURIComponent('Hola, quiero cotizar un plan a medida.');
       return;
     }
-    var total = Math.round((30000 + Math.max(v - 3000000, 0) * 0.005 + Math.max(d - 20, 0) * 500) / 5000) * 5000;
+    var total = Math.round((30000 + porFacturacion(v) + Math.max(d - 20, 0) * 500) / 5000) * 5000;
     tot.innerHTML = clp(total) + sufijo();
     det.textContent = ''; det.hidden = true;
     resumen = clp(total) + ' + IVA al mes' + datos;
-    cotizado = { plan: clp(total) + ' + IVA al mes', facturacion: clp(v), documentos: String(d) };
+    cotizado = { plan: clp(total) + ' + IVA al mes', facturacion: clp(v), documentos: String(d), registro: { facturacion: v, documentos: d, plan: total } };
     wsp.href = WSP + '?text=' + encodeURIComponent('Hola, el cotizador me dio un plan de ' + clp(total) + ' + IVA al mes. Quiero más información.');
   }
   fv.addEventListener('input', calcular); fd.addEventListener('input', calcular);
   fv.addEventListener('blur', function () { var v = num(fv.value); if (v !== null) fv.value = clp(v).slice(1); });
+
+  // ---------- Registro de cada cálculo en la pestaña "Cotizaciones" de la planilla, aunque no envíe sus datos ----------
+  // Solo facturación, documentos y valor del plan, con un código al azar de esta visita (no se guarda en el navegador).
+  var VISITA = Math.random().toString(36).slice(2, 10), ultimoRegistro = '', esperaRegistro = null, registros = 0;
+  function cotizacion(accion) {
+    if (!cotizado) return null;
+    var r = cotizado.registro;
+    return { visita: VISITA, accion: accion, facturacion: r.facturacion, documentos: r.documentos, plan: r.plan };
+  }
+  function registrar(accion) {
+    clearTimeout(esperaRegistro); esperaRegistro = null;
+    if (num(fv.value) === null || num(fd.value) === null) return;
+    calcular();
+    var c = cotizacion(accion), clave = c ? [c.facturacion, c.documentos, accion].join('|') : '';
+    if (!c || clave === ultimoRegistro || registros >= 20) return;
+    ultimoRegistro = clave; registros++;
+    try { fetch(ENVIO, { method: 'POST', keepalive: true, body: JSON.stringify({ tipo: 'cotizacion', cotizacion: c }) }).catch(function () {}); } catch (e) {}
+  }
+  function registrarLuego() { clearTimeout(esperaRegistro); esperaRegistro = setTimeout(function () { registrar('Calculó'); }, 2500); }
+  fv.addEventListener('input', registrarLuego); fd.addEventListener('input', registrarLuego);
+  document.addEventListener('visibilitychange', function () { if (document.visibilityState === 'hidden' && esperaRegistro) registrar('Calculó'); });
 
   // ---------- Cambio entre paso 1 y paso 2 ----------
   form.style.display = 'none';
@@ -455,7 +480,7 @@ Agende una conversación</a>
     avisoCotizador('ctz-ventas', faltaV ? 'Ingrese su facturación mensual.' : '');
     avisoCotizador('ctz-docs', faltaD ? 'Ingrese sus documentos al mes.' : '');
     if (faltaV || faltaD) { (faltaV ? fv : fd).focus(); return; }
-    calcular();
+    registrar('Pulsó Avanzar');
     plan.innerHTML = '';
     var l1 = document.createElement('strong'); l1.textContent = 'Plan cotizado: ' + cotizado.plan;
     var l2 = document.createElement('span'); l2.style.color = '#4A5568';
@@ -553,7 +578,6 @@ Agende una conversación</a>
     agregar('Comentario', 'f-comentario');
     return l;
   }
-  var ENVIO = 'https://script.google.com/macros/s/AKfycbyCSCmx3NWBvTdWwTU8xAj5SSv4BAv9Mds2Ldu7DbNwvuWac27VTHazPUMmBIHFLv_iOw/exec';   // aplicación web de Apps Script "Cotizador sitio web" (cuenta sebastian@ssfinanzas.cl)
   function marcados(nombre) {
     return Array.prototype.map.call(form.querySelectorAll('input[name="' + nombre + '"]:checked'), function (c) { return c.value; }).join(', ');
   }
@@ -571,7 +595,7 @@ Agende una conversación</a>
     if (enviando || !validar()) return;
     var boton = campo('ctz-enviar'), aviso = campo('f-errores');
     enviando = true; boton.disabled = true; boton.textContent = 'Enviando…'; aviso.textContent = '';
-    fetch(ENVIO, { method: 'POST', body: JSON.stringify({ web: valor('f-web'), datos: datos() }) })
+    fetch(ENVIO, { method: 'POST', body: JSON.stringify({ web: valor('f-web'), datos: datos(), cotizacion: cotizacion('Envió sus datos') }) })
       .then(function (r) { return r.json(); })
       .then(function (j) {
         if (!j || !j.ok) throw new Error('no se guardó');
