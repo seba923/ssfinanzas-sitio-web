@@ -249,11 +249,13 @@ Agende una conversación</a>
 </details>
 <div style="display: flex; flex-wrap: wrap; gap: 16px">
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Facturación mensual con IVA ($)
-<input id="ctz-ventas" name="ventas" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 5.000.000" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
+<input id="ctz-ventas" name="ventas" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 5.000.000" aria-describedby="ctz-ventas-error" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
+<span id="ctz-ventas-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
 <label style="flex: 1 1 240px; min-width: 0; display: flex; flex-direction: column; gap: 6px; font-size: 14px; font-weight: 600; color: #0B1C4D">Documentos al mes
-<input id="ctz-docs" aria-describedby="ctz-docs-ayuda" name="documentos" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 40" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
+<input id="ctz-docs" aria-describedby="ctz-docs-ayuda ctz-docs-error" name="documentos" type="text" inputmode="numeric" autocomplete="off" placeholder="Ej.: 40" style="font: inherit; font-weight: 400; font-size: 16px; min-height: 48px; box-sizing: border-box; padding: 10px 14px; border: 1px solid #C9D1E0; border-radius: 10px; color: #2D3748; background: #FFFFFF; width: 100%">
 <span id="ctz-docs-ayuda" style="font-size: 13px; font-weight: 400; line-height: 1.4; color: #4A5568">Facturas de compra y venta + boletas por rendiciones</span>
+<span id="ctz-docs-error" style="font-size: 14px; font-weight: 400; color: #B42318"></span>
 </label>
 </div>
 <div id="ctz-resultado" aria-live="polite" style="background: #F4F6FA; border: 1px solid #E1E6EF; border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px">
@@ -402,6 +404,7 @@ Agende una conversación</a>
   var tot = campo('ctz-total'), det = campo('ctz-detalle'), wsp = campo('ctz-wsp'), form = campo('ctz-form');
   var WSP = 'https://wa.me/56991232170', CORREO = 'sebastian@ssfinanzas.cl';
   var resumen = '';   // lo que dio el cotizador, para el mensaje del paso 2
+  var cotizado = null;   // { plan, facturacion, documentos } del cotizador
   var paso1 = campo('ctz-paso1'), seccion = campo('cotizador'), avanzar = campo('ctz-avanzar'), plan = campo('ctz-plan');
 
   // ---------- Paso 1: cotizador (fórmula interna: PRECIOS.md del repositorio del bot) ----------
@@ -413,7 +416,7 @@ Agende una conversación</a>
     if (v === null && d === null) {
       tot.innerHTML = 'Desde $30.000' + sufijo();
       det.hidden = false; det.textContent = 'Escriba sus datos y verá el valor de su plan.';
-      resumen = ''; wsp.href = WSP; return;
+      resumen = ''; cotizado = null; wsp.href = WSP; return;
     }
     v = v || 0; d = d || 0;
     var partes = [];
@@ -424,6 +427,7 @@ Agende una conversación</a>
       tot.innerHTML = 'Plan a medida';
       det.hidden = false; det.textContent = 'Para ese volumen preparo una cotización según su empresa. Escríbame y la revisamos.';
       resumen = 'Plan a medida' + datos;
+      cotizado = { plan: 'Plan a medida', facturacion: clp(v), documentos: String(d) };
       wsp.href = WSP + '?text=' + encodeURIComponent('Hola, quiero cotizar un plan a medida.');
       return;
     }
@@ -431,6 +435,7 @@ Agende una conversación</a>
     tot.innerHTML = clp(total) + sufijo();
     det.textContent = ''; det.hidden = true;
     resumen = clp(total) + ' + IVA al mes' + datos;
+    cotizado = { plan: clp(total) + ' + IVA al mes', facturacion: clp(v), documentos: String(d) };
     wsp.href = WSP + '?text=' + encodeURIComponent('Hola, el cotizador me dio un plan de ' + clp(total) + ' + IVA al mes. Quiero más información.');
   }
   fv.addEventListener('input', calcular); fd.addEventListener('input', calcular);
@@ -438,8 +443,24 @@ Agende una conversación</a>
 
   // ---------- Cambio entre paso 1 y paso 2 ----------
   form.style.display = 'none';
+  function avisoCotizador(id, msg) {
+    var e = campo(id); campo(id + '-error').textContent = msg;
+    e.style.borderColor = msg ? '#B42318' : '#C9D1E0';
+    if (msg) e.setAttribute('aria-invalid', 'true'); else e.removeAttribute('aria-invalid');
+  }
+  fv.addEventListener('input', function () { if (num(fv.value) !== null) avisoCotizador('ctz-ventas', ''); });
+  fd.addEventListener('input', function () { if (num(fd.value) !== null) avisoCotizador('ctz-docs', ''); });
   avanzar.addEventListener('click', function () {
-    plan.textContent = resumen ? 'Plan cotizado: ' + resumen : 'Puede completar sus datos aunque no haya usado el cotizador.';
+    var faltaV = num(fv.value) === null, faltaD = num(fd.value) === null;
+    avisoCotizador('ctz-ventas', faltaV ? 'Ingrese su facturación mensual.' : '');
+    avisoCotizador('ctz-docs', faltaD ? 'Ingrese sus documentos al mes.' : '');
+    if (faltaV || faltaD) { (faltaV ? fv : fd).focus(); return; }
+    calcular();
+    plan.innerHTML = '';
+    var l1 = document.createElement('strong'); l1.textContent = 'Plan cotizado: ' + cotizado.plan;
+    var l2 = document.createElement('span'); l2.style.color = '#4A5568';
+    l2.textContent = 'Facturación ingresada: ' + cotizado.facturacion + ' · Documentos ingresados: ' + cotizado.documentos;
+    plan.appendChild(l1); plan.appendChild(document.createElement('br')); plan.appendChild(l2);
     paso1.style.display = 'none'; form.style.display = 'flex';
     seccion.scrollIntoView({ block: 'start' }); campo('ctz-paso2-titulo').focus({ preventScroll: true });
   });
@@ -538,7 +559,7 @@ Agende una conversación</a>
   }
   function datos() {
     function v(id) { var e = campo(id); return e && visible(e) ? valor(id) : ''; }
-    return { plan: resumen || 'no usó el cotizador', nombre: v('f-nombre'), empresa: v('f-empresa'), telefono: telefonoCompleto(),
+    return { plan: cotizado ? cotizado.plan : '', facturacion: cotizado ? cotizado.facturacion : '', documentos: cotizado ? cotizado.documentos : '', nombre: v('f-nombre'), empresa: v('f-empresa'), telefono: telefonoCompleto(),
       contacto: marcados('f-medio'), correo: v('f-correo'), rubro: v('f-rubro'), tipo: v('f-tipo'), regimen: v('f-regimen'),
       contab14d8: v('f-tipo-contab'), estado: v('f-estado'), activos: v('f-activos'), activosNombre: v('f-activos-nombre'),
       activosFecha: v('f-activos-fecha'), deudas: marcados('f-deuda'), inventario: v('f-inventario'), retiros: v('f-retiros'),
