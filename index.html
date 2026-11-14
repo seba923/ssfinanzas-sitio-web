@@ -85,8 +85,9 @@ Agende una conversación</a>
 <!-- ===== Videos del asistente (inicio) ===== -->
 <style>
 .ssv-wrap{width:100%;max-width:340px;display:flex;flex-direction:column;align-items:center;gap:14px}
-.ssv-phone{position:relative;width:100%;aspect-ratio:720/1244;box-sizing:border-box;border:6px solid #08122F;border-radius:30px;overflow:hidden;background:#EFEAE2;box-shadow:0 24px 60px rgba(3,10,30,0.45)}
-.ssv-phone video{display:block;width:100%;height:100%;object-fit:cover;background:#EFEAE2}
+.ssv-phone{position:relative;width:100%;box-sizing:border-box;padding:7px;border:1px solid rgba(255,255,255,0.16);border-radius:34px;overflow:hidden;background:#08122F;box-shadow:0 24px 60px rgba(3,10,30,0.45)}
+/* la pantalla conserva la proporción exacta del video (720×1244): se ve completo, sin recortes en los bordes */
+.ssv-phone video{display:block;width:100%;height:auto;aspect-ratio:720/1244;object-fit:contain;border-radius:26px;background:#EFEAE2}
 .ssv-tabs{display:flex;flex-wrap:wrap;justify-content:center;gap:8px}
 .ssv-tab{font:inherit;font-size:13px;line-height:1;color:#D5DCEC;background:transparent;border:1px solid rgba(255,255,255,0.3);border-radius:999px;padding:0 14px;min-height:36px;cursor:pointer}
 .ssv-tab:hover{border-color:#C8A24B;color:#FFFFFF}
